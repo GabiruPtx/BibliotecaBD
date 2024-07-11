@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,11 +35,11 @@ public class TelaLogin extends javax.swing.JFrame {
         txtLogin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
-        botãoEntrar = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         clickEsqueceuSenha = new javax.swing.JLabel();
         clickCadastro = new javax.swing.JLabel();
         Faixa = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pergamum");
@@ -53,15 +54,14 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Matrícula/SIAPE");
 
-        txtLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLoginActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Senha");
 
-        botãoEntrar.setText("Entrar");
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         clickEsqueceuSenha.setText("Esqueceu a senha?");
         clickEsqueceuSenha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -91,10 +91,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
         Faixa.setForeground(new java.awt.Color(153, 153, 153));
 
-        jButton1.setText("Voltar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnVoltarMouseClicked(evt);
             }
         });
 
@@ -111,9 +111,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botãoEntrar)
+                        .addComponent(btnEntrar)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -164,8 +164,8 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botãoEntrar)
-                            .addComponent(jButton1))
+                            .addComponent(btnEntrar)
+                            .addComponent(btnVoltar))
                         .addContainerGap())))
         );
 
@@ -183,10 +183,6 @@ public class TelaLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLoginActionPerformed
 
     private void clickEsqueceuSenhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickEsqueceuSenhaMouseEntered
         clickEsqueceuSenha.setForeground(Color.BLUE);
@@ -216,11 +212,24 @@ public class TelaLogin extends javax.swing.JFrame {
         novoFrame.setVisible(true);
     }//GEN-LAST:event_clickCadastroMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
         dispose();
         TelaTipoLogin novoFrame = new TelaTipoLogin();
         novoFrame.setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnVoltarMouseClicked
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        
+        String login = txtLogin.getText(); 
+        String senha = new String (txtSenha.getPassword());
+        
+        if (autenticar(login, senha)) {
+                    JOptionPane.showMessageDialog(TelaLogin.this, "Login bem-sucedido!");
+                    // Abrir a próxima tela ou realizar outras ações
+                } else {
+                    JOptionPane.showMessageDialog(TelaLogin.this, "Usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,10 +268,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator Faixa;
-    private javax.swing.JButton botãoEntrar;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel clickCadastro;
     private javax.swing.JLabel clickEsqueceuSenha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

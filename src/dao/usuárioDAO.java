@@ -46,4 +46,28 @@ public class usuárioDAO {
             
         }
     }
+    
+    public usuário logar(String login, String senha) {
+        String sql = "SELECT * FROM usuário WHERE matricula = ? AND senha = ?";
+        
+        usuário user = new usuário();
+        
+        try {
+            
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            return null;
+            
+        }
+    }
 }
