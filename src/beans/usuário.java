@@ -1,56 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans;
 
-/**
- *
- * @author usuario
- */
 public class usuário {
     
-    public enum tipoacesso{
-        aluno,
-        professor,
-        bibliotecario,
-        admin
-    };
-    
-    private int id_usuário;
-    private tipoacesso tipo;
-    private String nome_completo;
+    private String nomeCompleto;
+    private String matricula;
     private String email;
-    private int cpf;
-    private int celular;
-    private int celular_reserva;
+    private String cpf;
+    private String celular;
+    private String celularreserva;
     private String endereco;
     private String complemento;
-    private int cep;
+    private String cep;
     private String senha;
+    private String tipo;
 
-    public int getId_usuário() {
-        return id_usuário;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setId_usuário(int id_usuário) {
-        this.id_usuário = id_usuário;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
-    public tipoacesso getTipo() {
-        return tipo;
+    public String getMatrícula() {
+        return matricula;
     }
 
-    public void setTipo(tipoacesso tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getNome_completo() {
-        return nome_completo;
-    }
-
-    public void setNome_completo(String nome_completo) {
-        this.nome_completo = nome_completo;
+    public void setMatrícula(String matrícula) {
+        this.matricula = matrícula;
     }
 
     public String getEmail() {
@@ -61,28 +38,28 @@ public class usuário {
         this.email = email;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
-    public int getCelular_reserva() {
-        return celular_reserva;
+    public String getCelularreserva() {
+        return celularreserva;
     }
 
-    public void setCelular_reserva(int celular_reserva) {
-        this.celular_reserva = celular_reserva;
+    public void setCelularreserva(String celularreserva) {
+        this.celularreserva = celularreserva;
     }
 
     public String getEndereco() {
@@ -101,11 +78,11 @@ public class usuário {
         this.complemento = complemento;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -116,6 +93,13 @@ public class usuário {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
-           
 }
