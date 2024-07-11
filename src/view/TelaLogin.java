@@ -222,18 +222,68 @@ public class TelaLogin extends javax.swing.JFrame {
         
         String login = txtLogin.getText(); 
         String senha = new String (txtSenha.getPassword());
-        
-        if (autenticar(login, senha)) {
-                    JOptionPane.showMessageDialog(TelaLogin.this, "Login bem-sucedido!");
-                    // Abrir a próxima tela ou realizar outras ações
-                } else {
-                    JOptionPane.showMessageDialog(TelaLogin.this, "Usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-    }//GEN-LAST:event_btnEntrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+        usuárioDAO userDAO = new usuárioDAO();
+        usuário user = userDAO.login(login, senha);
+        
+        if (user != null) {
+
+            String nomeCompleto = user.getText();
+            String matricula = user.getText();
+            String email = user.getText();
+            String cpf = user.getText();
+            String celular = user.getText();
+            String celularreserva = user.getText();
+            String endereco = user.getText();
+            String complemento = user.getText();
+            String cep = user.getText();
+            String senha = user.getSenha();
+            String tipo = user.getTipo();
+            
+            if (tipo == "Aluno"){
+
+                    System.setProperty("nomeCompleto", user.getNomeCompleto());
+                    System.setProperty("matricula", user.getMatricula());
+                    System.setProperty("email", user.getEmail());
+                    System.setProperty("cpf", user.getCpf());
+                    System.setProperty("celular", user.getCelular());
+                    System.setProperty("celularreserva", user.getCelularreserva());
+                    System.setProperty("endereco", user.getEndereco());
+                    System.setProperty("complemento", user.getComplemento());
+                    System.setProperty("cep", user.getCep());
+                    System.setProperty("senha", user.getSenha());
+                    System.setProperty("tipo", user.getTipo());
+                    
+
+                    TelaPrincipal principal = new TelaPrincipal(); 
+                    principal.setVisible(true);
+                    this.setVisible(false);
+                
+            } else {
+
+                    System.setProperty("nomeCompleto", user.getNomeCompleto());
+                    System.setProperty("matricula", user.getMatricula());
+                    System.setProperty("email", user.getEmail());
+                    System.setProperty("cpf", user.getCpf());
+                    System.setProperty("celular", user.getCelular());
+                    System.setProperty("celularreserva", user.getCelularreserva());
+                    System.setProperty("endereco", user.getEndereco());
+                    System.setProperty("complemento", user.getComplemento());
+                    System.setProperty("cep", user.getCep());
+                    System.setProperty("senha", user.getSenha());
+                    System.setProperty("tipo", user.getTipo());
+                    
+
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    this.setVisible(false);
+                
+            }       
+            
+        } else {
+                    JOptionPane.showMessageDialog(TelaLogin.this, "Usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
