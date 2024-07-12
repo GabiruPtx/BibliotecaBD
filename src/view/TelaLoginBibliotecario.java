@@ -4,7 +4,10 @@
  */
 package view;
 
+import beans.usuário;
+import dao.usuárioDAO;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,13 +34,13 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtLogin = new javax.swing.JTextField();
+        txtLoginBibliotecario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        txtSenhaBibliotecario = new javax.swing.JPasswordField();
+        btnEntrar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton2 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pergamum");
@@ -50,15 +53,20 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
 
         jLabel2.setText("Login");
 
-        txtLogin.addActionListener(new java.awt.event.ActionListener() {
+        txtLoginBibliotecario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLoginActionPerformed(evt);
+                txtLoginBibliotecarioActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Senha");
 
-        jButton1.setText("Entrar");
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Esqueceu a senha?");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,10 +83,10 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
 
-        jButton2.setText("Voltar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnVoltarMouseClicked(evt);
             }
         });
 
@@ -91,9 +99,9 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btnVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btnEntrar)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 58, Short.MAX_VALUE)
@@ -103,15 +111,12 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
                                 .addGap(50, 50, 50))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLoginBibliotecario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSenhaBibliotecario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(41, 41, 41)))
-                                .addGap(101, 101, 101))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(101, 101, 101))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(175, 175, 175))
@@ -131,19 +136,19 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLoginBibliotecario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSenhaBibliotecario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addContainerGap(56, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(btnEntrar)
+                            .addComponent(btnVoltar))
                         .addContainerGap())))
         );
 
@@ -162,9 +167,9 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
+    private void txtLoginBibliotecarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginBibliotecarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLoginActionPerformed
+    }//GEN-LAST:event_txtLoginBibliotecarioActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         dispose();
@@ -180,11 +185,56 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
         jLabel5.setForeground(Color.BLACK);
     }//GEN-LAST:event_jLabel5MouseExited
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
         dispose();
         TelaTipoLogin novoFrame = new TelaTipoLogin();
         novoFrame.setVisible(true);
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btnVoltarMouseClicked
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+       
+      
+        String login = txtLoginBibliotecario.getText();
+        String senha = new String(txtSenhaBibliotecario.getPassword());
+    
+        usuárioDAO userDAO = new usuárioDAO();
+        usuário user = userDAO.logar(login, senha);
+
+        if (user != null) {
+            
+            String tipo = user.getTipo();
+            
+            if ("Bibliotecário".equals(tipo)) {
+                
+                System.setProperty("nomeCompleto", user.getNomeCompleto());
+                System.setProperty("matricula", user.getMatrícula());
+                System.setProperty("email", user.getEmail());
+                System.setProperty("cpf", user.getCpf());
+                System.setProperty("celular", user.getCelular());
+                System.setProperty("celularreserva", user.getCelularreserva());
+                System.setProperty("endereco", user.getEndereco());
+                System.setProperty("complemento", user.getComplemento());
+                System.setProperty("cep", user.getCep());
+                System.setProperty("senha", user.getSenha());
+                System.setProperty("tipo", user.getTipo());
+
+                TelaPrincipalBibliotecario novoframe = new TelaPrincipalBibliotecario();
+                novoframe.setVisible(true);
+                this.setVisible(false);
+                
+            } else {
+            
+                    JOptionPane.showMessageDialog(TelaLoginBibliotecario.this, "Acesso inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                
+            }
+            
+        } else {
+        
+        JOptionPane.showMessageDialog(TelaLoginBibliotecario.this, "Usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        
+        }
+        
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,15 +273,15 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtLogin;
-    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JTextField txtLoginBibliotecario;
+    private javax.swing.JPasswordField txtSenhaBibliotecario;
     // End of variables declaration//GEN-END:variables
 }

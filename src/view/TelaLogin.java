@@ -4,6 +4,8 @@
  */
 package view;
 
+import beans.usuário;
+import dao.usuárioDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -218,32 +220,22 @@ public class TelaLogin extends javax.swing.JFrame {
         novoFrame.setVisible(true);
     }//GEN-LAST:event_btnVoltarMouseClicked
 
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         
         String login = txtLogin.getText(); 
         String senha = new String (txtSenha.getPassword());
 
         usuárioDAO userDAO = new usuárioDAO();
-        usuário user = userDAO.login(login, senha);
+        usuário user = userDAO.logar(login, senha);
         
         if (user != null) {
 
-            String nomeCompleto = user.getText();
-            String matricula = user.getText();
-            String email = user.getText();
-            String cpf = user.getText();
-            String celular = user.getText();
-            String celularreserva = user.getText();
-            String endereco = user.getText();
-            String complemento = user.getText();
-            String cep = user.getText();
-            String senha = user.getSenha();
             String tipo = user.getTipo();
             
             if (tipo == "Aluno"){
 
                     System.setProperty("nomeCompleto", user.getNomeCompleto());
-                    System.setProperty("matricula", user.getMatricula());
+                    System.setProperty("matricula", user.getMatrícula());
                     System.setProperty("email", user.getEmail());
                     System.setProperty("cpf", user.getCpf());
                     System.setProperty("celular", user.getCelular());
@@ -262,7 +254,7 @@ public class TelaLogin extends javax.swing.JFrame {
             } else {
 
                     System.setProperty("nomeCompleto", user.getNomeCompleto());
-                    System.setProperty("matricula", user.getMatricula());
+                    System.setProperty("matricula", user.getMatrícula());
                     System.setProperty("email", user.getEmail());
                     System.setProperty("cpf", user.getCpf());
                     System.setProperty("celular", user.getCelular());
@@ -282,8 +274,11 @@ public class TelaLogin extends javax.swing.JFrame {
             
         } else {
                     JOptionPane.showMessageDialog(TelaLogin.this, "Usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-  
+        }    
+    }        
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

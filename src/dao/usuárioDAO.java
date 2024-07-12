@@ -49,40 +49,34 @@ public class usuárioDAO {
     
     public usuário logar(String login, String senha) {
         
-        String sql = "SELECT * FROM usuário WHERE matricula = ? AND senha = ?";
-        usuário user = new usuário();
-        
-        try {
-            
-            PreparedStatement stmt = this.conn.prepareStatement(sql);
+    String sql = "SELECT * FROM usuário WHERE matricula = ? AND senha = ?";
+    usuário user = null; // Inicializar como null
 
-            stmt.setString(1, login);
-            stmt.setString(2, senha);
-            ResultSet rs = stmt.executeQuery();
+    try {
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        stmt.setString(1, login);
+        stmt.setString(2, senha);
+        ResultSet rs = stmt.executeQuery();
 
-            while(rs.next()){
-
-                user.setNomeCompleto(rs.getString("nomeCompleto"));
-                user.setMatricula(rs.getString("matricula"));
-                user.setEmail(rs.getString("email"));
-                user.setCpf(rs.getString("cpf"));
-                user.setCelular(rs.getString("celular"));
-                user.setCelularreserva(rs.getString("celularreserva"));
-                user.setEndereco(rs.getString("endereco"));
-                user.setComplemento(rs.getString("complemento"));
-                user.setCep(rs.getString("cep"));
-                user.setSenha(rs.getString("senha"));
-                user.setTipo(rs.getString("Tipo"));
-                
-            }
-            
-            return user();
-            
-        } catch (Exception e) {
-            
-            System.out.println(e.getMessage());
-            return null;
-            
+        if (rs.next()) {
+            user = new usuário(); // Inicializar o usuário somente se uma linha for encontrada
+            user.setNomeCompleto(rs.getString("nomeCompleto"));
+            user.setMatrícula(rs.getString("matricula"));
+            user.setEmail(rs.getString("email"));
+            user.setCpf(rs.getString("cpf"));
+            user.setCelular(rs.getString("celular"));
+            user.setCelularreserva(rs.getString("celularreserva"));
+            user.setEndereco(rs.getString("endereco"));
+            user.setComplemento(rs.getString("complemento"));
+            user.setCep(rs.getString("cep"));
+            user.setSenha(rs.getString("senha"));
+            user.setTipo(rs.getString("tipo")); // Certifique-se de que a capitalização está correta
         }
+
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+    return user;
     }
 }

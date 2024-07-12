@@ -119,14 +119,14 @@ public class TelaCadastro extends javax.swing.JFrame {
                             .addComponent(txtConfirmarSenha)
                             .addComponent(txtSenha)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(240, 240, 240))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(139, 139, 139)))
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(147, 147, 147)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtComplemento)))
@@ -324,6 +324,16 @@ public class TelaCadastro extends javax.swing.JFrame {
                 txtSenha.setText("");
         
                 System.setProperty("nomeCompleto", user.getNomeCompleto());
+                System.setProperty("matricula", user.getMatrícula());
+                System.setProperty("email", user.getEmail());
+                System.setProperty("cpf", user.getCpf());
+                System.setProperty("celular", user.getCelular());
+                System.setProperty("celularreserva", user.getCelularreserva());
+                System.setProperty("endereco", user.getEndereco());
+                System.setProperty("complemento", user.getComplemento());
+                System.setProperty("cep", user.getCep());
+                System.setProperty("senhaSalva", user.getSenha());
+                System.setProperty("tipo", user.getTipo());
         
                 TelaPrincipal principal = new TelaPrincipal();
                 principal.setVisible(true);
@@ -360,6 +370,16 @@ public class TelaCadastro extends javax.swing.JFrame {
                 txtSenha.setText("");
         
                 System.setProperty("nomeCompleto", user.getNomeCompleto());
+                System.setProperty("matricula", user.getMatrícula());
+                System.setProperty("email", user.getEmail());
+                System.setProperty("cpf", user.getCpf());
+                System.setProperty("celular", user.getCelular());
+                System.setProperty("celularreserva", user.getCelularreserva());
+                System.setProperty("endereco", user.getEndereco());
+                System.setProperty("complemento", user.getComplemento());
+                System.setProperty("cep", user.getCep());
+                System.setProperty("senhaSalva", user.getSenha());
+                System.setProperty("tipo", user.getTipo());
         
                 TelaPrincipal principal = new TelaPrincipal();
                 principal.setVisible(true);
