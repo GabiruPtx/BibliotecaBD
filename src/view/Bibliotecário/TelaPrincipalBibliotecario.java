@@ -4,6 +4,11 @@
  */
 package view.Bibliotecário;
 
+import javax.swing.JOptionPane;
+import view.TelaAjuda;
+import view.TelaPrincipal;
+import view.TelaTipoLogin;
+
 /**
  *
  * @author usuario
@@ -57,11 +62,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         txtPergamum.setText("PERGAMUM");
 
         jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("<html> Pesquisa <br> Avançada <html>");
 
@@ -140,10 +140,20 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         mnAjuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\help.png")); // NOI18N
         mnAjuda.setText("Ajuda");
+        mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnAjudaMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnAjuda);
 
         mnSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\stop.png")); // NOI18N
         mnSair.setText("Sair");
+        mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnSairMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnSair);
 
         setJMenuBar(jMenuBar1);
@@ -201,9 +211,46 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void mnAjudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnAjudaMouseClicked
+        
+        dispose();
+        TelaAjuda novaTela = new TelaAjuda();
+        novaTela.setVisible(true);
+        
+    }//GEN-LAST:event_mnAjudaMouseClicked
+
+    private void mnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSairMouseClicked
+      
+        int response = JOptionPane.showConfirmDialog(
+                        TelaPrincipalBibliotecario.this,
+                        "Tem certeza que quer sair?",
+                        "Confirmação de Saída",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+                if (response == JOptionPane.YES_OPTION) {
+                    
+                    System.clearProperty("nomeCompleto");
+                    System.clearProperty("matricula");
+                    System.clearProperty("email");
+                    System.clearProperty("cpf");
+                    System.clearProperty("celular");
+                    System.clearProperty("celularreserva");
+                    System.clearProperty("endereco");
+                    System.clearProperty("complemento");
+                    System.clearProperty("cep");
+                    System.clearProperty("senha");
+                    System.clearProperty("tipo");
+                    
+                    System.out.println("Logout realizado com sucesso!");
+                   
+                    dispose();
+                    TelaTipoLogin novaTela = new TelaTipoLogin();
+                    novaTela.setVisible(true);
+                    
+                }
+                
+    }//GEN-LAST:event_mnSairMouseClicked
 
     /**
      * @param args the command line arguments

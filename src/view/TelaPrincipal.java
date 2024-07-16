@@ -172,7 +172,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtPergamum)
-                        .addGap(334, 334, 334)))
+                        .addGap(342, 342, 342)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,8 +252,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnUsuarioPerfilActionPerformed
 
     private void mnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSairMouseClicked
-        
-        System.out.println("Clicou");
         
         int response = JOptionPane.showConfirmDialog(
                         TelaPrincipal.this,
