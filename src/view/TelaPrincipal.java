@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author usuario
@@ -47,11 +49,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Pergamum");
         setMinimumSize(new java.awt.Dimension(770, 503));
         setResizable(false);
-        getContentPane().setLayout(null);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 126, 780, 14);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(20, 40, 630, 42);
 
         jButton1.setText("Pesquisar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,20 +56,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(665, 9, 80, 23);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(665, 86, 80, 22);
 
         jButton2.setText("<html> Pesquisa <br> Avançada <html>");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(665, 41, 82, 39);
 
         jLabel1.setText("PERGAMUM");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(330, 10, 70, 16);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,9 +95,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(40, 180, 710, 240);
-
         mnMenu.setText("Menu");
 
         mnMenuEmprestimos.setText("Empréstimos");
@@ -135,16 +121,95 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(mnAjuda);
 
         mnSair.setText("Sair");
+        mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnSairMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnSair);
 
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(330, 330, 330)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(265, 265, 265)
+                .addComponent(jButton1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(665, 665, 665)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel1))
+                    .addComponent(jButton1))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       System.out.println("Clicou");
+        
+        int response = JOptionPane.showConfirmDialog(
+                        TelaPrincipal.this,
+                        "Tem certeza que quer sair?",
+                        "Confirmação de Saída",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+                if (response == JOptionPane.YES_OPTION) {
+                    
+                    System.clearProperty("nomeCompleto");
+                    System.clearProperty("matricula");
+                    System.clearProperty("email");
+                    System.clearProperty("cpf");
+                    System.clearProperty("celular");
+                    System.clearProperty("celularreserva");
+                    System.clearProperty("endereco");
+                    System.clearProperty("complemento");
+                    System.clearProperty("cep");
+                    System.clearProperty("senha");
+                    System.clearProperty("tipo");
+                    
+                    System.out.println("Logout realizado com sucesso!");
+                   
+                    dispose();
+                    TelaTipoLogin novaTela = new TelaTipoLogin();
+                    novaTela.setVisible(true);
+                    
+                }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mnUsuarioPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsuarioPerfilActionPerformed
@@ -152,6 +217,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
    
         
     }//GEN-LAST:event_mnUsuarioPerfilActionPerformed
+
+    private void mnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSairMouseClicked
+        
+        System.out.println("Clicou");
+        
+        int response = JOptionPane.showConfirmDialog(
+                        TelaPrincipal.this,
+                        "Tem certeza que quer sair?",
+                        "Confirmação de Saída",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+                if (response == JOptionPane.YES_OPTION) {
+                    
+                    System.clearProperty("nomeCompleto");
+                    System.clearProperty("matricula");
+                    System.clearProperty("email");
+                    System.clearProperty("cpf");
+                    System.clearProperty("celular");
+                    System.clearProperty("celularreserva");
+                    System.clearProperty("endereco");
+                    System.clearProperty("complemento");
+                    System.clearProperty("cep");
+                    System.clearProperty("senha");
+                    System.clearProperty("tipo");
+                    
+                    System.out.println("Logout realizado com sucesso!");
+                   
+                    dispose();
+                    TelaTipoLogin novaTela = new TelaTipoLogin();
+                    novaTela.setVisible(true);
+                    
+                }
+                
+    }//GEN-LAST:event_mnSairMouseClicked
 
     /**
      * @param args the command line arguments
