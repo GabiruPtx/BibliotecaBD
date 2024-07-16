@@ -7,6 +7,7 @@ package view;
 import view.Bibliotecário.TelaLoginBibliotecario;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 //Tela para seleção do tipo de login: Aluno/Professor ou Bibliotecário.
 
@@ -35,7 +36,6 @@ public class TelaTipoLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pergamum");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("/images/2s1kg77.png"));
         setIconImages(null);
         setResizable(false);
 
