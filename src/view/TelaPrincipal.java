@@ -51,11 +51,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setResizable(false);
 
         jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "Item 2", "Item 3", "Item 4" }));
 
@@ -172,7 +167,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtPergamum)
-                        .addGap(342, 342, 342)))
+                        .addGap(353, 353, 353)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,39 +204,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       System.out.println("Clicou");
-        
-        int response = JOptionPane.showConfirmDialog(
-                        TelaPrincipal.this,
-                        "Tem certeza que quer sair?",
-                        "Confirmação de Saída",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
-                );
-                if (response == JOptionPane.YES_OPTION) {
-                    
-                    System.clearProperty("nomeCompleto");
-                    System.clearProperty("matricula");
-                    System.clearProperty("email");
-                    System.clearProperty("cpf");
-                    System.clearProperty("celular");
-                    System.clearProperty("celularreserva");
-                    System.clearProperty("endereco");
-                    System.clearProperty("complemento");
-                    System.clearProperty("cep");
-                    System.clearProperty("senha");
-                    System.clearProperty("tipo");
-                    
-                    System.out.println("Logout realizado com sucesso!");
-                   
-                    dispose();
-                    TelaTipoLogin novaTela = new TelaTipoLogin();
-                    novaTela.setVisible(true);
-                    
-                }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mnUsuarioPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsuarioPerfilActionPerformed
         

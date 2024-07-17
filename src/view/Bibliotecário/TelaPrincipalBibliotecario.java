@@ -43,11 +43,11 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnMenu = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        mnMenuGerenciarAcervo = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         mnCadastro = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        mnCadastroUExterno = new javax.swing.JMenuItem();
+        mnCadastroUInterno = new javax.swing.JMenuItem();
         mnUsuario = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -57,6 +57,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         txtPergamum.setFont(new java.awt.Font("Meditative", 0, 25)); // NOI18N
         txtPergamum.setText("PERGAMUM");
@@ -102,9 +103,14 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         jMenuItem5.setText("Empréstimos");
         mnMenu.add(jMenuItem5);
 
-        jMenuItem9.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_open.png")); // NOI18N
-        jMenuItem9.setText("Gerenciar Acervo");
-        mnMenu.add(jMenuItem9);
+        mnMenuGerenciarAcervo.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_open.png")); // NOI18N
+        mnMenuGerenciarAcervo.setText("Gerenciar Acervo");
+        mnMenuGerenciarAcervo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnMenuGerenciarAcervoActionPerformed(evt);
+            }
+        });
+        mnMenu.add(mnMenuGerenciarAcervo);
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_go.png")); // NOI18N
         jMenuItem10.setText("Solicitações");
@@ -115,13 +121,23 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         mnCadastro.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\group.png")); // NOI18N
         mnCadastro.setText("Cadastro");
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_orange.png")); // NOI18N
-        jMenuItem7.setText("Cadastro de Usuário Externo");
-        mnCadastro.add(jMenuItem7);
+        mnCadastroUExterno.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_orange.png")); // NOI18N
+        mnCadastroUExterno.setText("Cadastro de Usuário Externo");
+        mnCadastroUExterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastroUExternoActionPerformed(evt);
+            }
+        });
+        mnCadastro.add(mnCadastroUExterno);
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_gray.png")); // NOI18N
-        jMenuItem8.setText("Cadastro de Usuário Interno");
-        mnCadastro.add(jMenuItem8);
+        mnCadastroUInterno.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_gray.png")); // NOI18N
+        mnCadastroUInterno.setText("Cadastro de Usuário Interno");
+        mnCadastroUInterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastroUInternoActionPerformed(evt);
+            }
+        });
+        mnCadastro.add(mnCadastroUInterno);
 
         jMenuBar1.add(mnCadastro);
 
@@ -252,6 +268,30 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_mnSairMouseClicked
 
+    private void mnCadastroUExternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroUExternoActionPerformed
+        
+        dispose();
+        TelaCadastroUsuarioExterno tela = new TelaCadastroUsuarioExterno();
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_mnCadastroUExternoActionPerformed
+
+    private void mnMenuGerenciarAcervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuGerenciarAcervoActionPerformed
+        
+        dispose();
+        TelaGerenciaAcervo tela = new TelaGerenciaAcervo();
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_mnMenuGerenciarAcervoActionPerformed
+
+    private void mnCadastroUInternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroUInternoActionPerformed
+        
+        dispose();
+        TelaCadastroBibliotecario frame = new TelaCadastroBibliotecario();
+        frame.setVisible(true);
+        
+    }//GEN-LAST:event_mnCadastroUInternoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -297,16 +337,16 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
+    private javax.swing.JMenuItem mnCadastroUExterno;
+    private javax.swing.JMenuItem mnCadastroUInterno;
     private javax.swing.JMenu mnMenu;
+    private javax.swing.JMenuItem mnMenuGerenciarAcervo;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
     private javax.swing.JLabel txtPergamum;
