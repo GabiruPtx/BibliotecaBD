@@ -102,6 +102,11 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
         });
 
         btnRemoverMaterial.setText("Remover material do acervo");
+        btnRemoverMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverMaterialActionPerformed(evt);
+            }
+        });
 
         btnAdicionarExemplares.setText("Adicionar exemplares");
 
@@ -297,6 +302,13 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
         novaTela.setVisible(true);
         
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnRemoverMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMaterialActionPerformed
+        
+        TelaRemoveObra novaTela = new TelaRemoveObra();
+        novaTela.setVisible(true);
+        
+    }//GEN-LAST:event_btnRemoverMaterialActionPerformed
 
     /**
      * @param args the command line arguments

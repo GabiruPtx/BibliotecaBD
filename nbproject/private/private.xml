@@ -4,13 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/view/Bibliotecário/TelaGerenciaAcervo.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/beans/usuário.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/view/Bibliotecário/TelaCadastroObra.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/view/Bibliotecário/TelaPrincipalBibliotecario.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/beans/material.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/view/TelaLogin.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/dao/materialDAO.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/dao/usuárioDAO.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/InterfaceJava/src/view/Bibliotecário/TelaRemoveObra.java</file>
         </group>
     </open-files>
 </project-private>
