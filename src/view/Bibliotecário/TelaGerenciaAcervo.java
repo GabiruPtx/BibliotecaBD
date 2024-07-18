@@ -289,7 +289,6 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
 
     private void btnAdicionarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMaterialActionPerformed
         
-        dispose();
         TelaCadastroObra novaTela = new TelaCadastroObra();
         novaTela.setVisible(true);
         
