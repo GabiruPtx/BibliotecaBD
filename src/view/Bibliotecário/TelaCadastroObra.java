@@ -245,7 +245,7 @@ public class TelaCadastroObra extends javax.swing.JFrame {
             materialDAO.cadastrarLivro(material);
         } else {
             String revista = txtRevista.getText();
-            int volume = Integer.parseInt(txtVolume.getText());
+            String volume = txtVolume.getText();
 
             material.setRevista(revista);
             material.setVolume(volume);

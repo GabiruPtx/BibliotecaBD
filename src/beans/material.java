@@ -11,7 +11,7 @@ public class material {
     private String tipo;
     private int qntExemplares;
     private String revista;
-    private int volume;
+    private String volume;
     private String resumo;
     
     
@@ -32,7 +32,7 @@ public class material {
         
     };
     
-    public material(String titulo, String autor, String editora, String genero, String AnoPublicacao, String tipo, int qntExemplares, String revista, int volume, String resumo){
+    public material(String titulo, String autor, String editora, String genero, String AnoPublicacao, String tipo, int qntExemplares, String revista, String volume, String resumo){
         
         this.título = titulo;
         this.autor = autor;
@@ -119,11 +119,11 @@ public class material {
         this.revista = revista;
     }
 
-    public int getVolume() {
+    public String getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(String volume) {
         this.volume = volume;
     }
 

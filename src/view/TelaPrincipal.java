@@ -4,7 +4,11 @@
  */
 package view;
 
+import beans.material;
+import dao.materialDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,11 +16,35 @@ import javax.swing.JOptionPane;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
+    private void preencheTabela() {
+    materialDAO materialDAO = new materialDAO();
+    List<material> listaMaterial = materialDAO.preencherTabelaMaterial();
+
+    DefaultTableModel tabelaMaterial = (DefaultTableModel) tblMateriais.getModel();
+    tabelaMaterial.setNumRows(0);
+
+    for (material m : listaMaterial) {
+        Object[] obj = new Object[]{
+            m.getTítulo(),
+            m.getAutor(),
+            m.getAnoPublicacao(),
+            m.getEditora(),
+            m.getGenero(),
+            m.getRevista(),
+            m.getVolume(),
+            m.getResumo(),
+            m.getTipo()
+                
+        };
+        tabelaMaterial.addRow(obj);
+    }
+}
+
+    
     public TelaPrincipal() {
         initComponents();
+        preencheTabela();
+        
     }
 
     /**
@@ -35,7 +63,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         txtPergamum = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMateriais = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnMenu = new javax.swing.JMenu();
         mnMenuEmprestimos = new javax.swing.JMenuItem();
@@ -59,22 +87,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtPergamum.setFont(new java.awt.Font("Meditative", 0, 25)); // NOI18N
         txtPergamum.setText("PERGAMUM");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Título", "Autor", "Data de publicação", "Editora", "Gênero", "Resumo", "Tipo"
+                "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -85,21 +113,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(10);
+        jScrollPane1.setViewportView(tblMateriais);
+        if (tblMateriais.getColumnModel().getColumnCount() > 0) {
+            tblMateriais.getColumnModel().getColumn(0).setResizable(false);
+            tblMateriais.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblMateriais.getColumnModel().getColumn(1).setResizable(false);
+            tblMateriais.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tblMateriais.getColumnModel().getColumn(2).setResizable(false);
+            tblMateriais.getColumnModel().getColumn(2).setPreferredWidth(10);
+            tblMateriais.getColumnModel().getColumn(3).setResizable(false);
+            tblMateriais.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tblMateriais.getColumnModel().getColumn(4).setResizable(false);
+            tblMateriais.getColumnModel().getColumn(5).setResizable(false);
+            tblMateriais.getColumnModel().getColumn(5).setPreferredWidth(10);
+            tblMateriais.getColumnModel().getColumn(6).setResizable(false);
+            tblMateriais.getColumnModel().getColumn(6).setPreferredWidth(10);
         }
 
         mnMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book.png")); // NOI18N
@@ -161,22 +189,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtPergamum)
-                .addGap(353, 353, 353)
+                .addGap(396, 396, 396)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jTextField1)
                 .addGap(17, 17, 17)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +331,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnMenu;
@@ -312,6 +339,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnUsuario;
     private javax.swing.JMenuItem mnUsuarioNotificacao;
     private javax.swing.JMenuItem mnUsuarioPerfil;
+    private javax.swing.JTable tblMateriais;
     private javax.swing.JLabel txtPergamum;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class materialDAO {
     
@@ -105,7 +107,7 @@ public class materialDAO {
         PreparedStatement stmt2 = this.conn.prepareStatement(sql2);
         stmt2.setInt(1, materialId);
         stmt2.setString(2, material.getRevista());
-        stmt2.setInt(3, material.getVolume());
+        stmt2.setString(3, material.getVolume());
         stmt2.executeUpdate();
         stmt2.close();
 
@@ -235,5 +237,67 @@ public class materialDAO {
             }
         }
 }
+    
+    public List<material> preencherTabelaMaterial() {
+    String sql = "SELECT " +
+                 "    m.id, " +
+                 "    m.titulo, " +
+                 "    m.autor, " +
+                 "    m.Ano_publicacao, " +
+                 "    m.resumo, " +
+                 "    m.tipo, " +
+                 "    l.editora, " +
+                 "    l.genero, " +
+                 "    a.revista, " +
+                 "    a.volume " +
+                 "FROM " +
+                 "    material m " +
+                 "LEFT JOIN " +
+                 "    livro l ON m.id = l.id " +
+                 "LEFT JOIN " +
+                 "    artigo a ON m.id = a.id";
+
+    try {
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        List<material> listaMaterial = new ArrayList<>();
+        while (rs.next()) {
+            material m = new material();
+            m.setId(rs.getInt("id"));
+            m.setTítulo(rs.getString("Titulo"));
+            m.setAutor(rs.getString("Autor"));
+            m.setAnoPublicacao(rs.getString("Ano_publicacao"));
+            m.setResumo(rs.getString("Resumo"));
+            m.setTipo(rs.getString("Tipo"));
+            
+            if ("LIVRO".equalsIgnoreCase(m.getTipo())) {
+                
+                m.setEditora(rs.getString("editora"));
+                m.setGenero(rs.getString("genero"));
+                m.setVolume("");
+                m.setRevista("");
+                
+            } else if ("ARTIGO".equalsIgnoreCase(m.getTipo())) {
+                
+                m.setRevista(rs.getString("revista"));
+                m.setVolume(rs.getString("volume"));
+                m.setEditora("");
+                m.setGenero("");
+                
+            }
+            
+            listaMaterial.add(m);
+        }
+        return listaMaterial;
+        
+    } catch (Exception e) {
+        
+        e.printStackTrace();
+        return null;
+        
+    }
+}
+
+
     
 }
