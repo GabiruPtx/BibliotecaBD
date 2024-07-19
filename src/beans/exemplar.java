@@ -4,11 +4,13 @@ public class exemplar {
     
     private int id;
     private int materialId;
+    private String titulo;
     private String status;
     private String andar;
     private String corredor;
     private String estante;
     private String prateleira;
+
     
     public exemplar(){
     
@@ -30,6 +32,14 @@ public class exemplar {
         this.materialId = materialId;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    
     public String getStatus() {
         return status;
     }

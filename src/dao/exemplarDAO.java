@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class exemplarDAO {
     
@@ -153,5 +155,95 @@ public class exemplarDAO {
         }
 }
 
+    public void excluirExemplar(int exemplarId){
+    
+        String sql = "DELETE FROM exemplar WHERE id = ?";
+        
+        try{
+            
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1,exemplarId);
+            stmt.executeUpdate();
+            stmt.close();
+            
+            conn.commit();
+            
+        }catch(Exception ex){
+            
+            try {
+                
+                conn.rollback(); // Desfaz a transação em caso de erro
+                
+            } catch (SQLException exc) {
+                
+                System.out.println("Erro ao fazer rollback: " + exc.getMessage());
+                
+            }
+            
+            System.out.println("Erro ao excluir material: " + ex.getMessage());
+            
+        } finally {
+            
+            try {
+                
+                conn.setAutoCommit(true); // Restaura o modo padrão de commit automático
+                
+            } catch (SQLException e) {
+                
+                e.printStackTrace();
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    public List<exemplar> preencherTabelaExemplar() {
+        
+    String sql = "SELECT " +
+                 "    e.id, " +
+                 "    e.material_id, " +
+                 "    e.status, " +
+                 "    e.andar, " +
+                 "    e.corredor, " +
+                 "    e.estante, " +
+                 "    e.prateleira, " +
+                 "    m.Titulo " +
+                 "FROM " +
+                 "    exemplar e " +
+                 "LEFT JOIN " +
+                 "    material m ON e.material_id = m.id ";
+
+    try {
+        
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        List<exemplar> listaExemplar = new ArrayList<>();
+        
+        while (rs.next()) {
+            
+            exemplar e = new exemplar();
+            e.setId(rs.getInt("id"));
+            e.setTitulo(rs.getString("Titulo"));
+            e.setStatus(rs.getString("status"));
+            e.setAndar(rs.getString("andar"));
+            e.setCorredor(rs.getString("corredor"));
+            e.setEstante(rs.getString("estante"));
+            e.setPrateleira(rs.getString("prateleira"));
+            
+
+            
+            listaExemplar.add(e);
+        }
+        return listaExemplar;
+        
+    } catch (Exception e) {
+        
+        e.printStackTrace();
+        return null;
+        
+    }
+}
     
 }

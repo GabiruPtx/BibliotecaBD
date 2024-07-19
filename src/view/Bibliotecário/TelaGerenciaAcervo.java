@@ -2,21 +2,39 @@ package view.Bibliotecário;
 
 import beans.exemplar;
 import dao.exemplarDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import view.TelaAjuda;
 import view.TelaTipoLogin;
-import view.Bibliotecário.TelaPrincipalBibliotecario;
-/**
- *
- * @author usuario
- */
+
 public class TelaGerenciaAcervo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaGerenciaAcervo
-     */
+    private void preencheTabela() {
+    exemplarDAO exemplarDAO = new exemplarDAO();
+    List<exemplar> listaExemplar = exemplarDAO.preencherTabelaExemplar();
+
+    DefaultTableModel tabelaExemplar = (DefaultTableModel) tblExemplares.getModel();
+    tabelaExemplar.setNumRows(0);
+
+    for (exemplar e : listaExemplar) {
+        Object[] obj = new Object[]{
+            e.getId(),
+            e.getTitulo(),
+            e.getStatus(),
+            e.getAndar(),
+            e.getCorredor(),
+            e.getEstante(),
+            e.getPrateleira()
+                
+        };
+        tabelaExemplar.addRow(obj);
+    }
+}
+    
     public TelaGerenciaAcervo() {
         initComponents();
+        preencheTabela();
     }
 
     /**
@@ -37,7 +55,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
         btnRemoverExemplares = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblExemplares = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnMenu = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -57,6 +75,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
         txtPergamum.setFont(new java.awt.Font("Meditative", 0, 25)); // NOI18N
         txtPergamum.setText("PERGAMUM");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("ACERVO");
 
         btnAdicionarMaterial.setText("Adicionar material ao acervo");
@@ -94,7 +113,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblExemplares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -105,7 +124,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
                 "ID Exemplar", "Título", "Status", "Andar", "Corredor", "Estante", "Prateleira"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblExemplares);
 
         mnMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book.png")); // NOI18N
         mnMenu.setText("Menu");
@@ -193,7 +212,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
                 .addComponent(btnAdicionarMaterial)
                 .addGap(67, 67, 67)
                 .addComponent(btnRemoverMaterial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
                 .addComponent(btnAdicionarExemplares)
                 .addGap(96, 96, 96)
                 .addComponent(btnRemoverExemplares)
@@ -201,25 +220,24 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(523, 523, 523)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPergamum)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel1))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(531, 531, 531)
+                        .addComponent(txtPergamum))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(572, 572, 572)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(txtPergamum)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -229,7 +247,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
                     .addComponent(btnRemoverExemplares))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVoltar)
                 .addContainerGap())
         );
@@ -393,7 +411,6 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
     private javax.swing.JMenuItem mnCadastroUExterno;
@@ -401,6 +418,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     private javax.swing.JMenu mnMenu;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
+    private javax.swing.JTable tblExemplares;
     private javax.swing.JLabel txtPergamum;
     // End of variables declaration//GEN-END:variables
 }

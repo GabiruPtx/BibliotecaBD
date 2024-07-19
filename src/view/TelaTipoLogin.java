@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import view.Bibliotecário.TelaLoginBibliotecario;
-import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
 
 //Tela para seleção do tipo de login: Aluno/Professor ou Bibliotecário.
 
 public class TelaTipoLogin extends javax.swing.JFrame {
 
-    
-    //Cria uma nova tela TelaTipoLogin.
     
     public TelaTipoLogin() {
         initComponents();
@@ -33,6 +25,8 @@ public class TelaTipoLogin extends javax.swing.JFrame {
         Faixa = new javax.swing.JSeparator();
         BotãoAlunoProfessor = new javax.swing.JButton();
         BotãoBibliotecário = new javax.swing.JButton();
+        icoCoruja = new javax.swing.JLabel();
+        txtPergamum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pergamum");
@@ -57,28 +51,48 @@ public class TelaTipoLogin extends javax.swing.JFrame {
             }
         });
 
+        icoCoruja.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\coruja.png")); // NOI18N
+
+        txtPergamum.setFont(new java.awt.Font("Meditative", 0, 24)); // NOI18N
+        txtPergamum.setText("PERGAMUM");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Faixa, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(27, 27, 27)
                 .addComponent(BotãoAlunoProfessor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(BotãoBibliotecário)
                 .addGap(35, 35, 35))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Faixa)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Título)
-                .addGap(130, 130, 130))
+                .addGap(123, 123, 123))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(icoCoruja))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(txtPergamum)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Título)
+                .addComponent(icoCoruja, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPergamum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Título)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Faixa, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -96,10 +110,14 @@ public class TelaTipoLogin extends javax.swing.JFrame {
     private void BotãoAlunoProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotãoAlunoProfessorActionPerformed
         dispose();
         try {
+            
             TelaLogin novoFrame = new TelaLogin();
             novoFrame.setVisible(true);
+            
         } catch (Exception e) {
+            
             JOptionPane.showMessageDialog(this, "Erro ao abrir a tela de login de Aluno/Professor", "Erro", JOptionPane.ERROR_MESSAGE);
+            
         }
         
     }//GEN-LAST:event_BotãoAlunoProfessorActionPerformed
@@ -109,10 +127,14 @@ public class TelaTipoLogin extends javax.swing.JFrame {
     private void BotãoBibliotecárioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotãoBibliotecárioActionPerformed
         dispose();
         try {
+            
             TelaLoginBibliotecario novoFrame = new TelaLoginBibliotecario();
             novoFrame.setVisible(true);
+            
         } catch (Exception e) {
+            
             JOptionPane.showMessageDialog(this, "Erro ao abrir a tela de login de Bibliotecário", "Erro", JOptionPane.ERROR_MESSAGE);
+            
         }
     }//GEN-LAST:event_BotãoBibliotecárioActionPerformed
 
@@ -157,6 +179,8 @@ public class TelaTipoLogin extends javax.swing.JFrame {
     private javax.swing.JButton BotãoBibliotecário;
     private javax.swing.JSeparator Faixa;
     private javax.swing.JLabel Título;
+    private javax.swing.JLabel icoCoruja;
+    private javax.swing.JLabel txtPergamum;
     // End of variables declaration//GEN-END:variables
 
 }
