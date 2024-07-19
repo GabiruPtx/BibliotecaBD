@@ -41,13 +41,12 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtCelularreserva = new javax.swing.JTextField();
-        btnVoltar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txtCPF = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
         txtConfirmarSenha = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pergamum");
         setBackground(new java.awt.Color(204, 204, 204));
         setResizable(false);
@@ -84,13 +83,6 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
         jLabel11.setText("<html> - Mínimo de 8 caracteres <html>");
 
         jLabel13.setText("Celular reserva (opcional)");
-
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("CPF");
 
@@ -153,9 +145,7 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
                                 .addGap(147, 147, 147)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btnVoltar)
-                                .addGap(331, 331, 331)
+                                .addGap(413, 413, 413)
                                 .addComponent(btnCadastrar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -227,9 +217,7 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCelularreserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVoltar)
-                    .addComponent(btnCadastrar))
+                .addComponent(btnCadastrar)
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -359,14 +347,6 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        
-        dispose();
-        TelaPrincipalBibliotecario novoFrame = new TelaPrincipalBibliotecario();
-        novoFrame.setVisible(true);
-        
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -407,7 +387,6 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

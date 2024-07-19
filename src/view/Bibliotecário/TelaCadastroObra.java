@@ -1,6 +1,8 @@
 package view.Bibliotecário;
 
+import beans.exemplar;
 import beans.material;
+import dao.exemplarDAO;
 import dao.materialDAO;
 import javax.swing.JOptionPane;
 import view.TelaPrincipal;
@@ -239,25 +241,38 @@ public class TelaCadastroObra extends javax.swing.JFrame {
         material.setResumo(resumo);
         
         materialDAO materialDAO = new materialDAO();
-        
+        int materialId = -1; // Inicialize a variável antes dos blocos if-else
+
         try {
-        if (categoria.equals("LIVRO")) {
-            materialDAO.cadastrarLivro(material);
-        } else {
-            String revista = txtRevista.getText();
-            String volume = txtVolume.getText();
+            
+            if (categoria.equals("LIVRO")) {
+                
+                materialId = materialDAO.cadastrarLivro(material);
+            
+            } else {
+                
+                String revista = txtRevista.getText();
+                String volume = txtVolume.getText();
+            
+                material.setRevista(revista);
+                material.setVolume(volume);
 
-            material.setRevista(revista);
-            material.setVolume(volume);
+                materialId = materialDAO.cadastrarArtigo(material);
+            }
 
-            materialDAO.cadastrarArtigo(material);
+        if (materialId == -1) {
+            
+            throw new Exception("ID do material não gerado.");
+            
         }
-
         // Mensagem de sucesso
-        JOptionPane.showMessageDialog(this, "Material cadastrado com sucesso!");
-
+        JOptionPane.showMessageDialog(this, "Material e exemplares cadastrados com sucesso!");
+        
+        exemplarDAO exDAO = new exemplarDAO();
+        exDAO.cadastroExemplar(material, materialId);
+        
         // Mensagem de lembrete
-        JOptionPane.showMessageDialog(this, "Por favor, não se esqueça de cadastrar os exemplares.");
+        JOptionPane.showMessageDialog(this, "Por favor, não se esqueça de finalizar o cadastrastro dos exemplares.");
 
         // Limpar os campos após cadastro
         txtTitulo.setText("");
@@ -271,12 +286,10 @@ public class TelaCadastroObra extends javax.swing.JFrame {
         txtResumo.setText("");
 
     } catch (Exception e) {
+        
         JOptionPane.showMessageDialog(this, "Erro ao cadastrar material: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        
     }
-        
-        
-        
-        
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

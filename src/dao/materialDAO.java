@@ -23,94 +23,126 @@ public class materialDAO {
         
     }
     
-    public void cadastrarLivro(material material) {
+    public int cadastrarLivro(material material) {
+        
     String sql = "INSERT INTO material (Titulo, Ano_publicacao, Resumo, Qnt_exemplares, Autor, Tipo)" +
                  " VALUES (?, ?, ?, ?, ?, ?)";
     String sql3 = "INSERT INTO livro (id, editora, genero)" +
                   " VALUES (?, ?, ?)";
+    int materialId = -1; // Valor padrão para indicar que o ID não foi gerado
 
     try {
         conn.setAutoCommit(false); // Inicia a transação
 
         // Insere o material e obtém o ID gerado
-        PreparedStatement stmt = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        stmt.setString(1, material.getTítulo());
-        stmt.setString(2, material.getAnoPublicacao());
-        stmt.setString(3, material.getResumo());
-        stmt.setInt(4, material.getQntExemplares());
-        stmt.setString(5, material.getAutor());
-        stmt.setString(6, material.getTipo());
-        stmt.executeUpdate();
+        try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, material.getTítulo());
+            stmt.setString(2, material.getAnoPublicacao());
+            stmt.setString(3, material.getResumo());
+            stmt.setInt(4, material.getQntExemplares());
+            stmt.setString(5, material.getAutor());
+            stmt.setString(6, material.getTipo());
+            stmt.executeUpdate();
 
-        ResultSet rs = stmt.getGeneratedKeys();
-        int materialId = 0;
-        if (rs.next()) {
-            materialId = rs.getInt(1);
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                
+                if (rs.next()) {
+                    
+                    materialId = rs.getInt(1); // Obtém o ID do material
+                    
+                } else {
+                    
+                    throw new SQLException("Failed to retrieve the generated ID for material.");
+                    
+                }
+            }
         }
-        rs.close();
-        stmt.close();
-
-        // Insere na tabela livro
-        PreparedStatement stmt3 = this.conn.prepareStatement(sql3);
-        stmt3.setInt(1, materialId);
-        stmt3.setString(2, material.getEditora());
-        stmt3.setString(3, material.getGenero());
-        stmt3.executeUpdate();
-        stmt3.close();
-
+        
+         // Insere na tabela livro usando o ID do material
+        if (materialId != -1) {
+            try (PreparedStatement stmt3 = conn.prepareStatement(sql3)) {
+                stmt3.setInt(1, materialId);
+                stmt3.setString(2, material.getEditora());
+                stmt3.setString(3, material.getGenero());
+                stmt3.executeUpdate();
+            }
+        }
+        
         conn.commit(); // Finaliza a transação
+        
     } catch (Exception e) {
+        
         try {
+            
             conn.rollback(); // Desfaz a transação em caso de erro
+            
         } catch (SQLException ex) {
+            
             System.out.println("Erro ao fazer rollback: " + ex.getMessage());
+            
         }
+        
         System.out.println("Erro ao inserir livro: " + e.getMessage());
+        
     } finally {
+        
         try {
+            
             conn.setAutoCommit(true); // Restaura o modo padrão de commit automático
+            
         } catch (SQLException e) {
+            
             e.printStackTrace();
+            
         }
     }
+    
+    return materialId;
 }
 
-    public void cadastrarArtigo(material material) {
+    public int cadastrarArtigo(material material) {
     
         String sql = "INSERT INTO material (Titulo, Ano_publicacao, Resumo, Qnt_exemplares, Autor, Tipo)" +
                  " VALUES (?, ?, ?, ?, ?, ?)";
         String sql2 = "INSERT INTO artigo (id, revista, volume)" +
                   " VALUES (?, ?, ?)";
+        int materialId = -1;
 
     try {
         
         conn.setAutoCommit(false); // Inicia a transação
 
-        // Insere o material e obtém o ID gerado
-        PreparedStatement stmt = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        stmt.setString(1, material.getTítulo());
-        stmt.setString(2, material.getAnoPublicacao());
-        stmt.setString(3, material.getResumo());
-        stmt.setInt(4, material.getQntExemplares());
-        stmt.setString(5, material.getAutor());
-        stmt.setString(6, material.getTipo());
-        stmt.executeUpdate();
+        try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, material.getTítulo());
+            stmt.setString(2, material.getAnoPublicacao());
+            stmt.setString(3, material.getResumo());
+            stmt.setInt(4, material.getQntExemplares());
+            stmt.setString(5, material.getAutor());
+            stmt.setString(6, material.getTipo());
+            stmt.executeUpdate();
 
-        ResultSet rs = stmt.getGeneratedKeys();
-        int materialId = 0;
-        if (rs.next()) {
-            materialId = rs.getInt(1);
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                
+                if (rs.next()) {
+                    
+                    materialId = rs.getInt(1); // Obtém o ID do material
+                    
+                } else {
+                    
+                    throw new SQLException("Failed to retrieve the generated ID for material.");
+                    
+                }
+            }
         }
-        rs.close();
-        stmt.close();
-
-        // Insere na tabela artigo
-        PreparedStatement stmt2 = this.conn.prepareStatement(sql2);
-        stmt2.setInt(1, materialId);
-        stmt2.setString(2, material.getRevista());
-        stmt2.setString(3, material.getVolume());
-        stmt2.executeUpdate();
-        stmt2.close();
+        
+        if (materialId != -1) {
+            try (PreparedStatement stmt2 = conn.prepareStatement(sql2)) {
+                stmt2.setInt(1, materialId);
+                stmt2.setString(2, material.getRevista());
+                stmt2.setString(3, material.getVolume());
+                stmt2.executeUpdate();
+            }
+        }
 
         conn.commit(); // Finaliza a transação
     } catch (Exception e) {
@@ -139,6 +171,8 @@ public class materialDAO {
             
         }
     }
+    
+    return materialId;
 }
    
     public void excluirMaterial(int materialId, String tipo) {

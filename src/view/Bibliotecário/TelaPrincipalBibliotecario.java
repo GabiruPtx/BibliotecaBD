@@ -239,7 +239,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtPergamum)
-                        .addGap(367, 367, 367)))
+                        .addGap(383, 383, 383)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2)
@@ -317,7 +317,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
     private void mnCadastroUExternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroUExternoActionPerformed
         
-        dispose();
         TelaCadastroUsuarioExterno tela = new TelaCadastroUsuarioExterno();
         tela.setVisible(true);
         
@@ -333,7 +332,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
     private void mnCadastroUInternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroUInternoActionPerformed
         
-        dispose();
         TelaCadastroBibliotecario frame = new TelaCadastroBibliotecario();
         frame.setVisible(true);
         
