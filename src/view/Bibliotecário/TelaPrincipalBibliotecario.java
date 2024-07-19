@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view.Bibliotecário;
 
 import beans.material;
@@ -39,8 +35,34 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         tabelaMaterial.addRow(obj);
     }
 }
+    private void buscaMaterial(String busca){
+        
+        materialDAO mDAO = new materialDAO();
+        
+        List<Integer> ids = mDAO.buscarIdsMateriais(busca);
+        List<material> buscaMaterial = mDAO.buscarMaterial(ids);
+        
+        DefaultTableModel tabelaMaterial = (DefaultTableModel) tblMateriais.getModel();
+        tabelaMaterial.setNumRows(0);
 
-    
+        for (material m : buscaMaterial) {
+            Object[] obj = new Object[]{
+                m.getTítulo(),
+                m.getAutor(),
+                m.getAnoPublicacao(),
+                m.getEditora(),
+                m.getGenero(),
+                m.getRevista(),
+                m.getVolume(),
+                m.getResumo(),
+                m.getTipo()
+
+            };
+            tabelaMaterial.addRow(obj);
+        }
+
+    }
+       
     public TelaPrincipalBibliotecario() {
         initComponents();
         preencheTabela();
@@ -58,8 +80,8 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         txtPergamum = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtBusca = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -86,7 +108,12 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         txtPergamum.setFont(new java.awt.Font("Meditative", 0, 25)); // NOI18N
         txtPergamum.setText("PERGAMUM");
 
-        jButton1.setText("Pesquisar");
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("<html> Pesquisa <br> Avançada <html>");
 
@@ -206,17 +233,17 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtPergamum)
-                        .addGap(352, 352, 352))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
+                        .addGap(367, 367, 367)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -229,11 +256,11 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPergamum)
-                    .addComponent(jButton1))
+                    .addComponent(btnPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -312,6 +339,13 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mnCadastroUInternoActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        
+        String busca = txtBusca.getText();
+        buscaMaterial(busca);
+        
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -348,7 +382,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -359,7 +393,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
     private javax.swing.JMenuItem mnCadastroUExterno;
@@ -369,6 +402,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
     private javax.swing.JTable tblMateriais;
+    private javax.swing.JTextField txtBusca;
     private javax.swing.JLabel txtPergamum;
     // End of variables declaration//GEN-END:variables
 }

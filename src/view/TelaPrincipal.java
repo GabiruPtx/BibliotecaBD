@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import beans.material;
@@ -39,7 +35,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tabelaMaterial.addRow(obj);
     }
 }
+    private void buscaMaterial(String busca){
+        
+        materialDAO mDAO = new materialDAO();
+        
+        List<Integer> ids = mDAO.buscarIdsMateriais(busca);
+        List<material> buscaMaterial = mDAO.buscarMaterial(ids);
+        
+        DefaultTableModel tabelaMaterial = (DefaultTableModel) tblMateriais.getModel();
+        tabelaMaterial.setNumRows(0);
 
+        for (material m : buscaMaterial) {
+            Object[] obj = new Object[]{
+                m.getTítulo(),
+                m.getAutor(),
+                m.getAnoPublicacao(),
+                m.getEditora(),
+                m.getGenero(),
+                m.getRevista(),
+                m.getVolume(),
+                m.getResumo(),
+                m.getTipo()
+
+            };
+            tabelaMaterial.addRow(obj);
+        }
+
+    }
     
     public TelaPrincipal() {
         initComponents();
@@ -57,8 +79,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtBusca = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         txtPergamum = new javax.swing.JLabel();
@@ -78,7 +100,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(770, 503));
         setResizable(false);
 
-        jButton1.setText("Pesquisar");
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "Item 2", "Item 3", "Item 4" }));
 
@@ -189,15 +216,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtPergamum)
-                .addGap(396, 396, 396)
+                .addGap(427, 427, 427)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(btnPesquisar)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jTextField1)
+                .addComponent(txtBusca)
                 .addGap(17, 17, 17)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
@@ -211,11 +238,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnPesquisar)
                     .addComponent(txtPergamum))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -289,6 +316,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mnMenuEmprestimosActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        
+        String busca = txtBusca.getText();
+        buscaMaterial(busca);
+        
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -325,13 +359,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnMenu;
     private javax.swing.JMenuItem mnMenuEmprestimos;
@@ -340,6 +373,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnUsuarioNotificacao;
     private javax.swing.JMenuItem mnUsuarioPerfil;
     private javax.swing.JTable tblMateriais;
+    private javax.swing.JTextField txtBusca;
     private javax.swing.JLabel txtPergamum;
     // End of variables declaration//GEN-END:variables
 }

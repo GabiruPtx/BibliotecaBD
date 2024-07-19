@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class materialDAO {
     
@@ -297,7 +298,102 @@ public class materialDAO {
         
     }
 }
+    
+    public List<Integer> buscarIdsMateriais(String busca) {
+    String sql = "SELECT m.id " +
+                 "FROM material m " +
+                 "LEFT JOIN livro l ON m.id = l.id " +
+                 "LEFT JOIN artigo a ON m.id = a.id " +
+                 "WHERE m.Titulo LIKE ? OR m.Autor LIKE ? OR m.Ano_publicacao LIKE ? OR m.Tipo LIKE ? " +
+                 "OR l.editora LIKE ? OR l.genero LIKE ? OR a.revista LIKE ? OR a.volume LIKE ?";
 
+    try {
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        String buscaPattern = "%" + busca + "%";
+        stmt.setString(1, buscaPattern);
+        stmt.setString(2, buscaPattern);
+        stmt.setString(3, buscaPattern);
+        stmt.setString(4, buscaPattern);
+        stmt.setString(5, buscaPattern);
+        stmt.setString(6, buscaPattern);
+        stmt.setString(7, buscaPattern);
+        stmt.setString(8, buscaPattern);
 
+        ResultSet rs = stmt.executeQuery();
+        List<Integer> listaIds = new ArrayList<>();
+
+        while (rs.next()) {
+            listaIds.add(rs.getInt("id"));
+        }
+        return listaIds;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+
+    public List<material> buscarMaterial(List<Integer> ids){
+        
+        if (ids == null || ids.isEmpty()) {
+        return new ArrayList<>();
+        }
+        
+        System.out.println("Comando executado");
+        
+        String sql = "SELECT m.id, m.Titulo, m.Autor, m.Ano_publicacao, m.Resumo, m.Tipo, " +
+                 "CASE WHEN m.Tipo = 'livro' THEN l.editora ELSE a.revista END AS especifico1, " +
+                 "CASE WHEN m.Tipo = 'livro' THEN l.genero ELSE a.volume END AS especifico2 " +
+                 "FROM material m " +
+                 "LEFT JOIN livro l ON m.id = l.id " +
+                 "LEFT JOIN artigo a ON m.id = a.id " +
+                 "WHERE m.id IN (" + ids.stream().map(String::valueOf).collect(Collectors.joining(",")) + ")";
+
+    try {
+        
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        List<material> listaMaterial = new ArrayList<>();
+        System.out.println("try executado");
+        while (rs.next()) {
+            
+            material m = new material();
+            m.setId(rs.getInt("id"));
+            m.setTítulo(rs.getString("Titulo"));
+            m.setAutor(rs.getString("Autor"));
+            m.setAnoPublicacao(rs.getString("Ano_publicacao"));
+            m.setResumo(rs.getString("Resumo"));
+            m.setTipo(rs.getString("Tipo"));
+            
+             // Set additional fields based on type
+            if ("livro".equalsIgnoreCase(m.getTipo())) {
+                
+                m.setEditora(rs.getString("especifico1"));
+                m.setGenero(rs.getString("especifico2"));
+                m.setRevista("");
+                m.setVolume("");
+                
+            } else if ("artigo".equalsIgnoreCase(m.getTipo())) {
+                
+                m.setRevista(rs.getString("especifico1"));
+                m.setVolume(rs.getString("especifico2"));
+                m.setEditora("");
+                m.setGenero("");
+                
+            }
+
+            
+            listaMaterial.add(m);
+        }
+        return listaMaterial;
+        
+    } catch (Exception e) {
+        
+        e.printStackTrace();
+        return null;
+        
+    }
+    
+    }
     
 }
