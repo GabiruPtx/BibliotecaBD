@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view.Bibliotecário;
 
 import beans.exemplar;
@@ -85,6 +81,11 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
         });
 
         btnRemoverExemplares.setText("Remover exemplares");
+        btnRemoverExemplares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverExemplaresActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,13 +96,13 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Exemplar", "Título", "Status", "Andar", "Corredor", "Estante", "Prateleira"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -317,12 +318,15 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     private void btnAdicionarExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarExemplaresActionPerformed
         
         exemplarDAO e = new exemplarDAO();
-        e.buscarExemplarComCamposDefault();
+        exemplar exemplarEncontrado = e.buscarExemplarComCamposDefault();
+        System.out.println(exemplarEncontrado);
         
-        if (e != null){
-        
+        if (exemplarEncontrado != null){
+            
+            
             TelaAdicionarExemplar frame = new TelaAdicionarExemplar();
             frame.setVisible(true);
+            
             
         }else {
             
@@ -332,6 +336,13 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnAdicionarExemplaresActionPerformed
+
+    private void btnRemoverExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverExemplaresActionPerformed
+       
+        TelaRemoverExemplar tela = new TelaRemoverExemplar();
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_btnRemoverExemplaresActionPerformed
 
     /**
      * @param args the command line arguments

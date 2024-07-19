@@ -20,6 +20,29 @@ public class exemplarDAO {
         
     }
     
+    public void cadastrarExemplar(exemplar e){
+        
+        String sql = "INSERT INTO exemplar (material_id, andar, corredor, estante, prateleira) VALUES "
+        + "(?, ?, ?, ?, ?)";
+        
+        try{
+            
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1, e.getMaterialId());
+            stmt.setString(2, e.getAndar());
+            stmt.setString(3, e.getCorredor());
+            stmt.setString(4, e.getEstante());
+            stmt.setString(5, e.getPrateleira());
+            
+            stmt.execute();
+            
+        } catch (Exception ex){
+            
+            System.out.println(ex.getMessage());
+            
+        }
+    }
+    
     public void cadastroExemplar(material material, int materialId) {
         
         String sql = "INSERT INTO exemplar(material_id) VALUES (?)";
@@ -54,15 +77,17 @@ public class exemplarDAO {
             
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-
+           
             if (rs.next()) {
+                
+            
                 exemplar e = new exemplar();
                 e.setId(rs.getInt("id"));
                 e.setMaterialId(rs.getInt("material_id"));
                 return e;
                 
             } else {
-                
+              
                 return null;
                 
             }

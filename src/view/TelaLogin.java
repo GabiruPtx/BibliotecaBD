@@ -233,7 +233,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
             String tipo = user.getTipo();
             
-            if (tipo == "Aluno"){
+            if (user.getTipo().equals("Aluno")){
 
                     System.setProperty("nomeCompleto", user.getNomeCompleto());
                     System.setProperty("matricula", user.getMatrícula());
@@ -247,6 +247,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     System.setProperty("senha", user.getSenha());
                     System.setProperty("tipo", user.getTipo());
                     
+                    System.out.println("cheguei");
 
                     TelaPrincipal principal = new TelaPrincipal(); 
                     principal.setVisible(true);
@@ -266,7 +267,8 @@ public class TelaLogin extends javax.swing.JFrame {
                     System.setProperty("senha", user.getSenha());
                     System.setProperty("tipo", user.getTipo());
                     
-
+                    System.out.println("Banana");
+                    
                     TelaPrincipalProfessor principal = new TelaPrincipalProfessor();
                     principal.setVisible(true);
                     this.setVisible(false);
