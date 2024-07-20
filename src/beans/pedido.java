@@ -9,6 +9,7 @@ public class pedido {
     private String tipoPedido;
     private String status;
     private int extensaoPrazo;
+    private int idEmprestimo;
 
     public int getId() {
         return id;
@@ -64,6 +65,14 @@ public class pedido {
 
     public void setExtensaoPrazo(int extensaoPrazo) {
         this.extensaoPrazo = extensaoPrazo;
+    }
+
+    public int getIdEmprestimo() {
+        return idEmprestimo;
+    }
+
+    public void setIdEmprestimo(int idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
     }
     
     

@@ -1,11 +1,13 @@
 package dao;
 
+import beans.emprestimo;
 import beans.pedido;
 import java.sql.Connection;
 import conection.Conection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class pedidoDAO {
     
@@ -139,6 +141,8 @@ public class pedidoDAO {
                 pedido.setExemplarId(rs.getInt("exemplar_id"));
                 pedido.setStatus(rs.getString("status"));
                 pedido.setTipoPedido(rs.getString("tipoPedido"));
+                pedido.setExtensaoPrazo(rs.getInt("extensaoPrazo"));
+                pedido.setIdEmprestimo(rs.getInt("idEmprestimo"));
                 
             }
         } catch (SQLException e) {
@@ -150,7 +154,7 @@ public class pedidoDAO {
         return pedido;
     }
     
-    public void atualizarPedido(pedido pedido){
+    public void autorizarPedido(pedido pedido){
         
         String sql = "UPDATE pedido SET status = 'AUTORIZADO' WHERE id = ?";
         
@@ -195,9 +199,129 @@ public class pedidoDAO {
         
     }
     
-    public void solicitarExtensão(int id, int DiasPrazo){
+    public void solicitarExtensão(int id, String DiasPrazo){
+        
+        String sqlBuscaEmprestimo = "SELECT * FROM emprestimo WHERE id = ?";
+        String sqlInserirPedido = "INSERT INTO pedido (tituloMaterial, usuario_Nome, exemplar_id, tipoPedido, idEmprestimo, extensaoPrazo) VALUES (?, ?, ?, ?, ?, ?)";
         
         
+        try {
+        conn.setAutoCommit(false);
+
+        emprestimo emprestimo = null;
+        
+        //Buscar o empréstimo solicitado
+        try (PreparedStatement stmt = conn.prepareStatement(sqlBuscaEmprestimo)) {
+            
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                
+                if (rs.next()) {
+                    
+                    emprestimo = new emprestimo();
+                    emprestimo.setId(rs.getInt("id"));
+                    emprestimo.setExemplarId(rs.getInt("exemplar_id"));
+                    emprestimo.setTitulo(rs.getString("tituloMaterial"));
+                    emprestimo.setUINome(rs.getString("UINome"));
+                    emprestimo.setUENome(rs.getString("UENome"));
+                    emprestimo.setDataEmprestimo(rs.getDate("dataEmprestimo"));
+                    emprestimo.setDataDevolucao(rs.getDate("dataDevolucao"));
+                    
+                    
+                } else {
+                    
+                    JOptionPane.showMessageDialog(null, "Id do empréstimo não é válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    
+                }
+            }
+        }
+
+        // Insere um novo pedido
+        try (PreparedStatement stmtPedido = conn.prepareStatement(sqlInserirPedido)) {
+            
+            stmtPedido.setString(1, emprestimo.getTitulo());
+            stmtPedido.setString(2, emprestimo.getUENome());
+            stmtPedido.setInt(3, emprestimo.getExemplarId());
+            stmtPedido.setString(4, "PRAZO");
+            stmtPedido.setInt(5, emprestimo.getId());
+            stmtPedido.setInt(6, Integer.parseInt(DiasPrazo));
+            stmtPedido.executeUpdate();
+            
+        }
+
+        conn.commit();
+        System.out.println("Pedido registrado com sucesso!");
+
+    } catch (SQLException e) {
+        
+        try {
+            
+            conn.rollback();
+            
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        }
+        
+        System.out.println("Erro ao requisitar pedido: " + e.getMessage());
+        
+    } finally {
+        
+        try {
+            
+            conn.setAutoCommit(true);
+            
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            
+        }
+    }
+        
+    }
+    
+    public void rejeitarPedido(pedido pedido){
+        
+        String sql = "UPDATE pedido SET status = 'REJEITADO' WHERE id = ?";
+        
+        try {
+        conn.setAutoCommit(false);
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, pedido.getId());
+            stmt.executeUpdate();
+            
+        }
+
+        conn.commit();
+        System.out.println("Status de pedido atualizado!");
+
+    } catch (SQLException e) {
+        
+        try {
+            
+            conn.rollback();
+            
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        }
+        
+        System.out.println("Erro ao atualizar status: " + e.getMessage());
+        
+    } finally {
+        
+        try {
+            
+            conn.setAutoCommit(true);
+            
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            
+        }
+    }
         
     }
     

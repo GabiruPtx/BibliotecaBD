@@ -12,14 +12,18 @@ private void configurarTela(pedido pedido) {
         // Configura a mensagem padrão para tipo de solicitação
         if (pedido.getTipoPedido().equals("EMPRESTIMO")) {
             
+            System.out.println(pedido.getTipoPedido());
             tipoSolicitação.setText("SOLICITAÇÃO DE EMPRÉSTIMO");
             txtTempoExtensao.setVisible(false);
             txtPrazo.setVisible(false);
             
         } else{
             
+            System.out.println(pedido.getTipoPedido());
             tipoSolicitação.setText("EXTENSÃO DE PRAZO");
-            txtTempoExtensao.setText("7 dias");
+            
+            txtTempoExtensao.setVisible(true);
+            txtPrazo.setText(Integer.toString(pedido.getExtensaoPrazo()));
             
         }
 
@@ -57,7 +61,7 @@ private void configurarTela(pedido pedido) {
         txtPrazo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtAutorizar = new javax.swing.JButton();
-        txtRevogar = new javax.swing.JButton();
+        txtRejeitar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -91,7 +95,12 @@ private void configurarTela(pedido pedido) {
             }
         });
 
-        txtRevogar.setText("Revogar");
+        txtRejeitar.setText("Rejeitar");
+        txtRejeitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRejeitarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,26 +113,26 @@ private void configurarTela(pedido pedido) {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtUser))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(txtTituloMaterial))
-                        .addGap(144, 144, 144)
+                        .addGap(155, 155, 155)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrazo)
                             .addComponent(txtTempoExtensao)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtRevogar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtAutorizar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(tipoSolicitação)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtRejeitar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtAutorizar)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(158, 158, 158)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(183, 183, 183))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,12 +148,12 @@ private void configurarTela(pedido pedido) {
                     .addComponent(txtUser)
                     .addComponent(txtTituloMaterial)
                     .addComponent(txtPrazo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAutorizar)
-                    .addComponent(txtRevogar))
+                    .addComponent(txtRejeitar))
                 .addContainerGap())
         );
 
@@ -161,8 +170,8 @@ private void configurarTela(pedido pedido) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,22 +184,87 @@ private void configurarTela(pedido pedido) {
         pedidoDAO pDAO = new pedidoDAO();
         pedido = pDAO.resgatarPedido();
         emprestimoDAO eDAO = new emprestimoDAO();
-        
+
         try{
             
-            eDAO.autorizarEmprestimo(pedido);
-            JOptionPane.showMessageDialog(this, "O empréstimo foi autorizado com sucesso!.");
-            pDAO.atualizarPedido(pedido);
-            JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
+            if( pedido.getTipoPedido().equals("EMPRESTIMO")){
+                
+
+                eDAO.autorizarEmprestimo(pedido);
+                JOptionPane.showMessageDialog(this, "O empréstimo foi autorizado com sucesso!.");
+                pDAO.autorizarPedido(pedido);
+                JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
+                dispose();  
+                
+            }else{
+               
+
+               eDAO.estenderPrazo(pedido);
+               JOptionPane.showMessageDialog(this, "A extensão do empréstimo foi autorizado com sucesso!.");
+               pDAO.autorizarPedido(pedido);
+               JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
+               dispose(); 
+               
+            }
+            
             
         }catch(Exception e){
             
-            JOptionPane.showMessageDialog(this, "Houve um problema ao registrar o empréstimo.");
+            if(pedido.getTipoPedido().equals("EMPRESTIMO")){
+                
+                JOptionPane.showMessageDialog(this, "Houve um problema ao registrar o empréstimo.");
+                
+            }else{
+                
+                JOptionPane.showMessageDialog(this, "Houve um problema ao atualizar o prazo do empréstimo.");
+                
+            }
             
         }
         
-        
     }//GEN-LAST:event_txtAutorizarActionPerformed
+
+    private void txtRejeitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRejeitarActionPerformed
+       
+        pedido pedido = new pedido();
+        pedidoDAO pDAO = new pedidoDAO();
+        pedido = pDAO.resgatarPedido();
+
+
+        try{
+            
+            if( pedido.getTipoPedido().equals("EMPRESTIMO")){
+                
+                JOptionPane.showMessageDialog(this, "O empréstimo foi rejeitado com sucesso!.");
+                pDAO.rejeitarPedido(pedido);
+                JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
+                dispose();  
+                
+            }else{
+               
+               JOptionPane.showMessageDialog(this, "A extensão do empréstimo foi rejeitada com sucesso!.");
+               pDAO.rejeitarPedido(pedido);
+               JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
+               dispose(); 
+               
+            }
+            
+            
+        }catch(Exception e){
+            
+            if(pedido.getTipoPedido().equals("EMPRESTIMO")){
+                
+                JOptionPane.showMessageDialog(this, "Houve um problema ao rejeitar o empréstimo.");
+                
+            }else{
+                
+                JOptionPane.showMessageDialog(this, "Houve um problema ao rejeitar o prazo do empréstimo.");
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_txtRejeitarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,7 +309,7 @@ private void configurarTela(pedido pedido) {
     private javax.swing.JLabel tipoSolicitação;
     private javax.swing.JButton txtAutorizar;
     private javax.swing.JLabel txtPrazo;
-    private javax.swing.JButton txtRevogar;
+    private javax.swing.JButton txtRejeitar;
     private javax.swing.JLabel txtTempoExtensao;
     private javax.swing.JLabel txtTituloMaterial;
     private javax.swing.JLabel txtUser;

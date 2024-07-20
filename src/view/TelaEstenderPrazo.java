@@ -1,5 +1,8 @@
 package view;
 
+import dao.pedidoDAO;
+import javax.swing.JOptionPane;
+
 
 public class TelaEstenderPrazo extends javax.swing.JFrame {
 
@@ -124,7 +127,23 @@ public class TelaEstenderPrazo extends javax.swing.JFrame {
     private void btnEnviarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarPedidoActionPerformed
         
         int idEmprestimo = Integer.parseInt(txtIdEmpréstimo.getText());
-        int diasEmprestimo = (Integer) boxDiasPrazo.getSelectedItem();
+        String diasEmprestimo = (String) boxDiasPrazo.getSelectedItem();
+        
+        
+        pedidoDAO pDAO = new pedidoDAO();
+        
+        try{
+            
+            pDAO.solicitarExtensão(idEmprestimo, diasEmprestimo);
+            JOptionPane.showMessageDialog(this, "Pedido de extensão realizado com sucesso!");
+            dispose();
+            
+        } catch (Exception e){
+            
+            JOptionPane.showMessageDialog(this, "Não foi possível realizar seu pedido. Talvez você tenha esgotado o número de extensões!");
+            dispose();
+            
+        }
         
         
     }//GEN-LAST:event_btnEnviarPedidoActionPerformed

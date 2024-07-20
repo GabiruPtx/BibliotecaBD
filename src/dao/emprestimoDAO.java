@@ -75,4 +75,56 @@ public class emprestimoDAO {
         
     }
     
+    public void estenderPrazo(pedido pedido){
+        
+        String sqlAtualizarData = "UPDATE emprestimo SET dataDevolucao = DATE_ADD(dataDevolucao, INTERVAL ? DAY) WHERE id = ?";
+
+    try {
+        conn.setAutoCommit(false);
+
+        try (PreparedStatement stmt = conn.prepareStatement(sqlAtualizarData)) {
+            System.out.println(pedido.getExtensaoPrazo());
+            System.out.println(pedido.getIdEmprestimo());
+            stmt.setInt(1, pedido.getExtensaoPrazo());
+            stmt.setInt(2, pedido.getIdEmprestimo());
+
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                
+                System.out.println("Data de devolução atualizada com sucesso!");
+                
+            } else {
+                
+                System.out.println("Nenhum empréstimo encontrado com o ID fornecido.");
+                
+            }
+
+            conn.commit();
+            
+        } catch (SQLException e) {
+            
+            conn.rollback();
+            System.out.println("Erro ao atualizar a data de devolução: " + e.getMessage());
+            
+        }
+        
+    } catch (SQLException e) {
+        
+        System.out.println("Erro na conexão: " + e.getMessage());
+        
+    } finally {
+        
+        try {
+            
+            conn.setAutoCommit(true);
+            
+        } catch (SQLException e) {
+            
+            System.out.println("Erro ao definir auto-commit: " + e.getMessage());
+        }
+    }
+        
+    }
+    
 }
