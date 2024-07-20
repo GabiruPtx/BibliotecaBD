@@ -2,6 +2,7 @@ package view.Bibliotecário;
 
 import beans.material;
 import dao.materialDAO;
+import dao.pedidoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -89,7 +90,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         mnMenu = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         mnMenuGerenciarAcervo = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        mnMenuSolicitacoes = new javax.swing.JMenuItem();
         mnCadastro = new javax.swing.JMenu();
         mnCadastroUExterno = new javax.swing.JMenuItem();
         mnCadastroUInterno = new javax.swing.JMenuItem();
@@ -160,9 +161,14 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         });
         mnMenu.add(mnMenuGerenciarAcervo);
 
-        jMenuItem10.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_go.png")); // NOI18N
-        jMenuItem10.setText("Solicitações");
-        mnMenu.add(jMenuItem10);
+        mnMenuSolicitacoes.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_go.png")); // NOI18N
+        mnMenuSolicitacoes.setText("Solicitações");
+        mnMenuSolicitacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnMenuSolicitacoesActionPerformed(evt);
+            }
+        });
+        mnMenu.add(mnMenuSolicitacoes);
 
         jMenuBar1.add(mnMenu);
 
@@ -341,6 +347,24 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+    private void mnMenuSolicitacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuSolicitacoesActionPerformed
+        
+        pedidoDAO pDAO = new pedidoDAO();
+        boolean pedido = pDAO.checarPedidosPendentes();
+        
+        if(pedido == true){
+            
+            TelaSolicitacao tela = new TelaSolicitacao();
+            tela.setVisible(true);
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(this, "Não há nenhuma solicitação pendente no momento!");
+            
+        }
+        
+    }//GEN-LAST:event_mnMenuSolicitacoesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -381,7 +405,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -393,6 +416,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnCadastroUInterno;
     private javax.swing.JMenu mnMenu;
     private javax.swing.JMenuItem mnMenuGerenciarAcervo;
+    private javax.swing.JMenuItem mnMenuSolicitacoes;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
     private javax.swing.JTable tblMateriais;

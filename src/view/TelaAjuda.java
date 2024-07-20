@@ -4,6 +4,13 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import view.TelaEmprestimos;
+import view.TelaNotificaçoes;
+import view.TelaPerfil;
+import view.TelaPrincipal;
+import view.TelaTipoLogin;
+
 /**
  *
  * @author usuario
@@ -28,32 +35,27 @@ public class TelaAjuda extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mnEmprestimos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        mnPerfil = new javax.swing.JMenuItem();
+        mnNotificaçoes = new javax.swing.JMenuItem();
+        mnSair = new javax.swing.JMenuItem();
+        mnAjuda = new javax.swing.JMenu();
+        mnVoltar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pergamum");
         setMinimumSize(new java.awt.Dimension(770, 503));
         getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Perguntas Frequentes");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -61,30 +63,6 @@ public class TelaAjuda extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 780, 40);
-
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel3.setText("pergunta 1");
-        jPanel3.add(jLabel3);
-
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(0, 40, 780, 50);
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel4.setText("pergunta 2");
-        jPanel4.add(jLabel4);
-
-        getContentPane().add(jPanel4);
-        jPanel4.setBounds(0, 90, 780, 50);
-
-        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel5.setText("pergunta 3");
-        jPanel5.add(jLabel5);
-
-        getContentPane().add(jPanel5);
-        jPanel5.setBounds(0, 140, 780, 50);
 
         jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,41 +85,74 @@ public class TelaAjuda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(660, 440, 70, 23);
+        jButton1.setBounds(660, 440, 70, 27);
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jList1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
 
-        jLabel6.setText("pergunta 4");
-        jPanel6.add(jLabel6);
-
-        getContentPane().add(jPanel6);
-        jPanel6.setBounds(0, 190, 780, 50);
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(50, 40, 680, 210);
 
         jMenu1.setText("Menu");
 
-        jMenuItem4.setText("Empréstimos");
-        jMenu1.add(jMenuItem4);
+        mnEmprestimos.setText("Empréstimos");
+        mnEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEmprestimosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnEmprestimos);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Usuário");
 
-        jMenuItem1.setText("Notificações");
-        jMenu2.add(jMenuItem1);
+        mnPerfil.setText("Perfil");
+        mnPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPerfilActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnPerfil);
 
-        jMenuItem2.setText("Sair");
-        jMenu2.add(jMenuItem2);
+        mnNotificaçoes.setText("Notificações");
+        mnNotificaçoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnNotificaçoesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnNotificaçoes);
 
-        jMenuItem3.setText("Perfil");
-        jMenu2.add(jMenuItem3);
+        mnSair.setText("Sair");
+        mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnSairMouseClicked(evt);
+            }
+        });
+        jMenu2.add(mnSair);
 
         jMenuBar1.add(jMenu2);
 
-        jMenu4.setText("Ajuda");
-        jMenuBar1.add(jMenu4);
+        mnAjuda.setText("Ajuda");
+        mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnAjudaMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(mnAjuda);
 
-        jMenu5.setText("Voltar");
-        jMenuBar1.add(jMenu5);
+        mnVoltar.setText("Voltar");
+        mnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnVoltarMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(mnVoltar);
 
         setJMenuBar(jMenuBar1);
 
@@ -156,6 +167,66 @@ public class TelaAjuda extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void mnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEmprestimosActionPerformed
+        dispose();
+        TelaEmprestimos novaTela = new TelaEmprestimos();
+        novaTela.setVisible(true);
+    }//GEN-LAST:event_mnEmprestimosActionPerformed
+
+    private void mnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPerfilActionPerformed
+        dispose();
+        TelaPerfil novaTela = new TelaPerfil();
+        novaTela.setVisible(true);
+    }//GEN-LAST:event_mnPerfilActionPerformed
+
+    private void mnNotificaçoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNotificaçoesActionPerformed
+        dispose();
+        TelaNotificaçoes novaTela = new TelaNotificaçoes();
+        novaTela.setVisible(true);
+    }//GEN-LAST:event_mnNotificaçoesActionPerformed
+
+    private void mnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSairMouseClicked
+        int response = JOptionPane.showConfirmDialog(
+                        TelaAjuda.this,
+                        "Tem certeza que quer sair?",
+                        "Confirmação de Saída",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+                if (response == JOptionPane.YES_OPTION) {
+                    
+                    System.clearProperty("nomeCompleto");
+                    System.clearProperty("matricula");
+                    System.clearProperty("email");
+                    System.clearProperty("cpf");
+                    System.clearProperty("celular");
+                    System.clearProperty("celularreserva");
+                    System.clearProperty("endereco");
+                    System.clearProperty("complemento");
+                    System.clearProperty("cep");
+                    System.clearProperty("senha");
+                    System.clearProperty("tipo");
+                    
+                    System.out.println("Logout realizado com sucesso!");
+                   
+                    dispose();
+                    TelaTipoLogin novaTela = new TelaTipoLogin();
+                    novaTela.setVisible(true);
+                }
+    }//GEN-LAST:event_mnSairMouseClicked
+
+    private void mnAjudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnAjudaMouseClicked
+        dispose();
+        TelaAjuda novaTela = new TelaAjuda();
+        novaTela.setVisible(true);
+    }//GEN-LAST:event_mnAjudaMouseClicked
+
+    private void mnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnVoltarMouseClicked
+        dispose();
+        TelaPrincipal novaTela = new TelaPrincipal();
+        novaTela.setVisible(true);
+    }//GEN-LAST:event_mnVoltarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -197,24 +268,18 @@ public class TelaAjuda extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenu mnAjuda;
+    private javax.swing.JMenuItem mnEmprestimos;
+    private javax.swing.JMenuItem mnNotificaçoes;
+    private javax.swing.JMenuItem mnPerfil;
+    private javax.swing.JMenuItem mnSair;
+    private javax.swing.JMenu mnVoltar;
     // End of variables declaration//GEN-END:variables
 }
