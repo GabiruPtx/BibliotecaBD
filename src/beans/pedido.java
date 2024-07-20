@@ -8,6 +8,7 @@ public class pedido {
     private int exemplarId;
     private String tipoPedido;
     private String status;
+    private int extensaoPrazo;
 
     public int getId() {
         return id;
@@ -24,8 +25,6 @@ public class pedido {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
-    
 
     public String getUserName() {
         return userName;
@@ -57,6 +56,14 @@ public class pedido {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getExtensaoPrazo() {
+        return extensaoPrazo;
+    }
+
+    public void setExtensaoPrazo(int extensaoPrazo) {
+        this.extensaoPrazo = extensaoPrazo;
     }
     
     

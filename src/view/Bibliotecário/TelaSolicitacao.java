@@ -1,7 +1,9 @@
 package view.Bibliotecário;
 
 import beans.pedido;
+import dao.emprestimoDAO;
 import dao.pedidoDAO;
+import javax.swing.JOptionPane;
 
 public class TelaSolicitacao extends javax.swing.JFrame {
 
@@ -27,11 +29,13 @@ private void configurarTela(pedido pedido) {
     }
     
     public TelaSolicitacao() {
+        
         pedido pedido = new pedido();
         pedidoDAO pDAO = new pedidoDAO();
         pedido = pDAO.resgatarPedido();
         initComponents();
         configurarTela(pedido);
+        
     }
 
     /**
@@ -167,6 +171,23 @@ private void configurarTela(pedido pedido) {
 
     private void txtAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAutorizarActionPerformed
         
+        pedido pedido = new pedido();
+        pedidoDAO pDAO = new pedidoDAO();
+        pedido = pDAO.resgatarPedido();
+        emprestimoDAO eDAO = new emprestimoDAO();
+        
+        try{
+            
+            eDAO.autorizarEmprestimo(pedido);
+            JOptionPane.showMessageDialog(this, "O empréstimo foi autorizado com sucesso!.");
+            pDAO.atualizarPedido(pedido);
+            JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
+            
+        }catch(Exception e){
+            
+            JOptionPane.showMessageDialog(this, "Houve um problema ao registrar o empréstimo.");
+            
+        }
         
         
     }//GEN-LAST:event_txtAutorizarActionPerformed

@@ -150,4 +150,55 @@ public class pedidoDAO {
         return pedido;
     }
     
+    public void atualizarPedido(pedido pedido){
+        
+        String sql = "UPDATE pedido SET status = 'AUTORIZADO' WHERE id = ?";
+        
+        try {
+        conn.setAutoCommit(false);
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, pedido.getId());
+            stmt.executeUpdate();
+            
+        }
+
+        conn.commit();
+        System.out.println("Status de pedido atualizado!");
+
+    } catch (SQLException e) {
+        
+        try {
+            
+            conn.rollback();
+            
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        }
+        
+        System.out.println("Erro ao atualizar status: " + e.getMessage());
+        
+    } finally {
+        
+        try {
+            
+            conn.setAutoCommit(true);
+            
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            
+        }
+    }
+        
+    }
+    
+    public void solicitarExtensão(int id, int DiasPrazo){
+        
+        
+        
+    }
+    
 }

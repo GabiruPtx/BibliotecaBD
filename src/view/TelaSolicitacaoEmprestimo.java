@@ -61,7 +61,7 @@ public class TelaSolicitacaoEmprestimo extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(txtTituloMaterial))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEnviar)
@@ -76,7 +76,7 @@ public class TelaSolicitacaoEmprestimo extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(2, 2, 2)
                 .addComponent(txtTituloMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 73, Short.MAX_VALUE)
                 .addComponent(btnEnviar)
                 .addContainerGap())
         );
@@ -112,11 +112,12 @@ public class TelaSolicitacaoEmprestimo extends javax.swing.JFrame {
             
             pDAO.solicitarEmprestimo(título, userName);
             JOptionPane.showMessageDialog(this, "Pedido de empréstimo realizado com sucesso!");
+            dispose();
             
         } catch (Exception e){
             
             JOptionPane.showMessageDialog(this, "Não foi possível realizar seu pedido. Talvez não haja exemplares disponíveis no momento!");
-            
+            dispose();
         }
         
     }//GEN-LAST:event_btnEnviarActionPerformed

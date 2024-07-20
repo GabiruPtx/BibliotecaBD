@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.Date;
+
 public class emprestimo {
     
     private int id;
@@ -7,8 +9,8 @@ public class emprestimo {
     private String UENome;
     private String titulo;
     private String UINome;
-    private String dataEmprestimo;
-    private String dataDevolucao;
+    private Date dataEmprestimo;
+    private Date dataDevolucao;
     private int chancesDePrazo;
     private String status;
 
@@ -56,21 +58,31 @@ public class emprestimo {
         this.UINome = UINome;
     }
 
-    public String getDataEmprestimo() {
+    public Date getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(String dataEmprestimo) {
+    public void setDataEmprestimo(Date dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public String getDataDevolucao() {
+    public Date getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(String dataDevolucao) {
+    public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
 
     public int getChancesDePrazo() {
         return chancesDePrazo;
