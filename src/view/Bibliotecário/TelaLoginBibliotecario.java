@@ -9,6 +9,7 @@ import beans.usuário;
 import dao.usuárioDAO;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import view.TelaEsqueceuSenha;
 import view.TelaTipoLogin;
 
 /**
@@ -194,7 +195,7 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
 
     private void txtEsqueceuASenhaBibliotecarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEsqueceuASenhaBibliotecarioMouseClicked
         dispose();
-        TelaEsqueciSenha novoFrame = new TelaEsqueciSenha();
+        TelaEsqueceuSenha novoFrame = new TelaEsqueceuSenha();
         novoFrame.setVisible(true);
     }//GEN-LAST:event_txtEsqueceuASenhaBibliotecarioMouseClicked
 
@@ -217,14 +218,14 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
       
         String login = txtLoginBibliotecario.getText();
         String senha = new String(txtSenhaBibliotecario.getPassword());
-    
+
         usuárioDAO userDAO = new usuárioDAO();
         usuário user = userDAO.logar(login, senha);
 
         if (user != null) {
             
             String tipo = user.getTipo();
-            
+
             if ("Bibliotecário".equals(tipo)) {
                 
                 System.setProperty("nomeCompleto", user.getNomeCompleto());
@@ -244,15 +245,14 @@ public class TelaLoginBibliotecario extends javax.swing.JFrame {
                 this.setVisible(false);
                 
             } else {
-            
-                    JOptionPane.showMessageDialog(TelaLoginBibliotecario.this, "Acesso inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                
+                JOptionPane.showMessageDialog(TelaLoginBibliotecario.this, "Acesso inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
                 
             }
-            
         } else {
-        
-        JOptionPane.showMessageDialog(TelaLoginBibliotecario.this, "Usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
-        
+            
+            JOptionPane.showMessageDialog(TelaLoginBibliotecario.this, "Usuário ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            
         }
         
     }//GEN-LAST:event_btnEntrarActionPerformed

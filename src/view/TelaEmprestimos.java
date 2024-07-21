@@ -91,7 +91,6 @@ public class TelaEmprestimos extends javax.swing.JFrame {
         mnMenu = new javax.swing.JMenu();
         mnUsuario = new javax.swing.JMenu();
         mnUsuarioPerfil = new javax.swing.JMenuItem();
-        mnUsuarioNotificacao = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
         mnSair = new javax.swing.JMenu();
 
@@ -247,10 +246,6 @@ public class TelaEmprestimos extends javax.swing.JFrame {
             }
         });
         mnUsuario.add(mnUsuarioPerfil);
-
-        mnUsuarioNotificacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\bell.png")); // NOI18N
-        mnUsuarioNotificacao.setText("Notificações");
-        mnUsuario.add(mnUsuarioNotificacao);
 
         jMenuBar1.add(mnUsuario);
 
@@ -431,7 +426,6 @@ public class TelaEmprestimos extends javax.swing.JFrame {
     private javax.swing.JMenu mnMenu;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
-    private javax.swing.JMenuItem mnUsuarioNotificacao;
     private javax.swing.JMenuItem mnUsuarioPerfil;
     private javax.swing.JTable tblEmprestimos;
     private javax.swing.JTable tblSolicitacoes;

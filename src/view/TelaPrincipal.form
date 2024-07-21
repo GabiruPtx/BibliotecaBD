@@ -44,14 +44,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnUsuarioPerfilActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnUsuarioNotificacao">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\bell.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Notifica&#xe7;&#xf5;es"/>
-              </Properties>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnAjuda">
@@ -210,16 +202,17 @@
         <Component class="javax.swing.JTable" name="tblMateriais">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="4">
-                <Column editable="false" title="T&#xed;tulo" type="java.lang.String"/>
-                <Column editable="false" title="Autor" type="java.lang.Object"/>
-                <Column editable="false" title="Ano de publica&#xe7;&#xe3;o" type="java.lang.Object"/>
-                <Column editable="false" title="Editora" type="java.lang.Object"/>
-                <Column editable="false" title="G&#xea;nero" type="java.lang.Object"/>
-                <Column editable="false" title="Revista" type="java.lang.Object"/>
-                <Column editable="false" title="Volume" type="java.lang.Object"/>
-                <Column editable="false" title="Resumo" type="java.lang.Object"/>
-                <Column editable="false" title="Tipo" type="java.lang.Object"/>
+              <Table columnCount="10" rowCount="4">
+                <Column editable="true" title="ID do material" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xed;tulo" type="java.lang.String"/>
+                <Column editable="true" title="Autor" type="java.lang.Object"/>
+                <Column editable="true" title="Ano de publica&#xe7;&#xe3;o" type="java.lang.Object"/>
+                <Column editable="true" title="Editora" type="java.lang.Object"/>
+                <Column editable="true" title="G&#xea;nero" type="java.lang.Object"/>
+                <Column editable="true" title="Revista" type="java.lang.Object"/>
+                <Column editable="true" title="Volume" type="java.lang.Object"/>
+                <Column editable="true" title="Resumo" type="java.lang.Object"/>
+                <Column editable="true" title="Tipo" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

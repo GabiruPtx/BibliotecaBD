@@ -2,6 +2,7 @@ package dao;
 
 import beans.exemplar;
 import beans.material;
+import beans.pedido;
 import conection.Conection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -244,6 +245,25 @@ public class exemplarDAO {
         return null;
         
     }
+}
+    
+    public boolean atualizarStatus(pedido p) {
+        
+        String sql = "UPDATE exemplar SET status = ? WHERE id = ?";
+
+        try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, "EMPRESTADO");
+            stmt.setInt(2, p.getExemplarId());
+            
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            
+            return false;
+        }
 }
     
 }

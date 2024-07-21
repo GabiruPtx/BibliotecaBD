@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.TelaAjuda;
+import view.TelaPerfil;
 import view.TelaPrincipal;
 import view.TelaTipoLogin;
 
@@ -22,6 +23,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
     for (material m : listaMaterial) {
         Object[] obj = new Object[]{
+            m.getId(),
             m.getTítulo(),
             m.getAutor(),
             m.getAnoPublicacao(),
@@ -88,7 +90,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnMenu = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        mnMenuEmpréstimos = new javax.swing.JMenuItem();
         mnMenuGerenciarAcervo = new javax.swing.JMenuItem();
         mnMenuSolicitacoes = new javax.swing.JMenuItem();
         mnCadastro = new javax.swing.JMenu();
@@ -96,7 +98,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         mnCadastroUInterno = new javax.swing.JMenuItem();
         mnUsuario = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
         mnSair = new javax.swing.JMenu();
 
@@ -117,20 +118,20 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo"
+                "ID do material", "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true
+                true, false, true, true, true, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -148,9 +149,14 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         mnMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book.png")); // NOI18N
         mnMenu.setText("Menu");
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_addresses.png")); // NOI18N
-        jMenuItem5.setText("Empréstimos");
-        mnMenu.add(jMenuItem5);
+        mnMenuEmpréstimos.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_addresses.png")); // NOI18N
+        mnMenuEmpréstimos.setText("Empréstimos");
+        mnMenuEmpréstimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnMenuEmpréstimosActionPerformed(evt);
+            }
+        });
+        mnMenu.add(mnMenuEmpréstimos);
 
         mnMenuGerenciarAcervo.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_open.png")); // NOI18N
         mnMenuGerenciarAcervo.setText("Gerenciar Acervo");
@@ -200,11 +206,12 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\pencil.png")); // NOI18N
         jMenuItem3.setText("Perfil");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         mnUsuario.add(jMenuItem3);
-
-        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\bell.png")); // NOI18N
-        jMenuItem4.setText("Notificação");
-        mnUsuario.add(jMenuItem4);
 
         jMenuBar1.add(mnUsuario);
 
@@ -269,8 +276,9 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -365,6 +373,20 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mnMenuSolicitacoesActionPerformed
 
+    private void mnMenuEmpréstimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuEmpréstimosActionPerformed
+         
+        TelaEmprestimoBibliotecario tela = new TelaEmprestimoBibliotecario();
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_mnMenuEmpréstimosActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       
+        TelaPerfil perfil = new TelaPerfil();
+        perfil.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -406,8 +428,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenu mnAjuda;
@@ -415,6 +435,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnCadastroUExterno;
     private javax.swing.JMenuItem mnCadastroUInterno;
     private javax.swing.JMenu mnMenu;
+    private javax.swing.JMenuItem mnMenuEmpréstimos;
     private javax.swing.JMenuItem mnMenuGerenciarAcervo;
     private javax.swing.JMenuItem mnMenuSolicitacoes;
     private javax.swing.JMenu mnSair;

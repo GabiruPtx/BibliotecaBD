@@ -2,6 +2,7 @@ package view.Bibliotecário;
 
 import beans.pedido;
 import dao.emprestimoDAO;
+import dao.exemplarDAO;
 import dao.pedidoDAO;
 import javax.swing.JOptionPane;
 
@@ -184,7 +185,8 @@ private void configurarTela(pedido pedido) {
         pedidoDAO pDAO = new pedidoDAO();
         pedido = pDAO.resgatarPedido();
         emprestimoDAO eDAO = new emprestimoDAO();
-
+        exemplarDAO exDAO = new exemplarDAO();
+        
         try{
             
             boolean sucesso = false;
@@ -194,6 +196,7 @@ private void configurarTela(pedido pedido) {
                 sucesso = eDAO.autorizarEmprestimo(pedido);
                 if (sucesso) {
                     
+                    exDAO.atualizarStatus(pedido);
                     JOptionPane.showMessageDialog(this, "O empréstimo foi autorizado com sucesso!");
                     
                 } else {

@@ -3,7 +3,6 @@ package view;
 import beans.usuário;
 import dao.usuárioDAO;
 import javax.swing.JOptionPane;
-import view.Professor.TelaPrincipalProfessor;
 
 public class TelaCadastro extends javax.swing.JFrame {
 
@@ -387,7 +386,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 System.setProperty("senhaSalva", user.getSenha());
                 System.setProperty("tipo", user.getTipo());
         
-                TelaPrincipalProfessor principal = new TelaPrincipalProfessor();
+                TelaPrincipal principal = new TelaPrincipal();
                 principal.setVisible(true);
                 this.setVisible(false);
             

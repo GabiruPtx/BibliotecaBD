@@ -5,6 +5,7 @@ import conection.Conection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class usuárioDAO {
     
@@ -49,34 +50,63 @@ public class usuárioDAO {
     
     public usuário logar(String login, String senha) {
         
-    String sql = "SELECT * FROM usuário WHERE matricula = ? AND senha = ?";
-    usuário user = null; // Inicializar como null
-
-    try {
-        PreparedStatement stmt = this.conn.prepareStatement(sql);
-        stmt.setString(1, login);
-        stmt.setString(2, senha);
-        ResultSet rs = stmt.executeQuery();
-
-        if (rs.next()) {
-            user = new usuário(); // Inicializar o usuário somente se uma linha for encontrada
-            user.setNomeCompleto(rs.getString("nomeCompleto"));
-            user.setMatrícula(rs.getString("matricula"));
-            user.setEmail(rs.getString("email"));
-            user.setCpf(rs.getString("cpf"));
-            user.setCelular(rs.getString("celular"));
-            user.setCelularreserva(rs.getString("celularreserva"));
-            user.setEndereco(rs.getString("endereco"));
-            user.setComplemento(rs.getString("complemento"));
-            user.setCep(rs.getString("cep"));
-            user.setSenha(rs.getString("senha"));
-            user.setTipo(rs.getString("tipo")); // Certifique-se de que a capitalização está correta
+        String sql = "SELECT * FROM usuário WHERE matricula = ? AND senha = ?";
+        usuário user = null;
+        
+        try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            try (ResultSet rs = stmt.executeQuery()) {
+                
+                if (rs.next()) {
+                    user = new usuário();
+                    user.setNomeCompleto(rs.getString("nomeCompleto"));
+                    user.setMatrícula(rs.getString("matricula"));
+                    user.setEmail(rs.getString("email"));
+                    user.setCpf(rs.getString("cpf"));
+                    user.setCelular(rs.getString("celular"));
+                    user.setCelularreserva(rs.getString("celularreserva"));
+                    user.setEndereco(rs.getString("endereco"));
+                    user.setComplemento(rs.getString("complemento"));
+                    user.setCep(rs.getString("cep"));
+                    user.setSenha(rs.getString("senha"));
+                    user.setTipo(rs.getString("tipo"));
+                    
+                }
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            System.err.println("Erro ao tentar logar: " + e.getMessage());
+            
+            e.printStackTrace();
+            
         }
-
-    } catch (Exception e) {
-        System.out.println(e.getMessage());
+        
+        return user;
     }
-
-    return user;
+    
+    public boolean alterarSenha(String matricula, String email, String novaSenha) {
+        String sql = "UPDATE usuário SET senha = ? WHERE matricula = ? AND email = ?";
+        
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, novaSenha);
+            stmt.setString(2, matricula);
+            stmt.setString(3, email); 
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Senha atualizada com sucesso!");
+                return true;
+            } else {
+                System.out.println("Não foi possível atualizar a senha. Matrícula ou e-mail incorretos.");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar a senha: " + e.getMessage());
+        }
+        return false;
     }
+    
 }

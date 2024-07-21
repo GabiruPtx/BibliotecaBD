@@ -88,6 +88,7 @@ public class emprestimoDAO {
 
         conn.commit();
         System.out.println("Empréstimo registrado com sucesso!");
+        
         return true;
         
     } catch (SQLException e) {

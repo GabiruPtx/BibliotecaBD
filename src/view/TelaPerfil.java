@@ -1,27 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import javax.swing.JOptionPane;
 import view.Bibliotecário.TelaPrincipalBibliotecario;
+import view.TelaAjuda;
 import view.TelaEmprestimos;
-import view.TelaNotificaçoes;
 import view.TelaPrincipal;
 import view.TelaTipoLogin;
 
-/**
- *
- * @author usuario
- */
+
 public class TelaPerfil extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
+    public void atualizarPerfil() {
+        // Lê as propriedades do sistema
+        String nomeCompleto = System.getProperty("nomeCompleto");
+        String matricula = System.getProperty("matricula");
+        String email = System.getProperty("email");
+        String cpf = System.getProperty("cpf");
+        String celular = System.getProperty("celular");
+        String celularReserva = System.getProperty("celularreserva");
+        String endereco = System.getProperty("endereco");
+        String complemento = System.getProperty("complemento");
+        String cep = System.getProperty("cep");
+        String senha = System.getProperty("senha");
+        String tipo = System.getProperty("tipo");
+
+        // Atualiza os labels com os valores das propriedades
+        txtNomeUsuario.setText(nomeCompleto);
+        txtIdentificadorUsuario.setText(matricula);
+        txtEmailUsuario.setText(email);
+        txtCelularUsuario.setText(celular);
+        txtCelularReserva.setText(celularReserva);
+        txtEndereçoUsuario.setText(endereco);
+        txtComplementoUsuario.setText(complemento);
+        txtCEPUsuario.setText(cep);
+        
+    
+    }
+
+    
+    
     public TelaPerfil() {
+        
         initComponents();
+        atualizarPerfil();
+        
     }
 
     /**
@@ -34,80 +56,83 @@ public class TelaPerfil extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        txtNomeUsuario = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        txtIdentificadorUsuario = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        txtEmailUsuario = new javax.swing.JLabel();
+        txtCelularUsuario = new javax.swing.JLabel();
+        txtCelularReserva = new javax.swing.JLabel();
+        txtEndereçoUsuario = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        txtCEPUsuario = new javax.swing.JLabel();
+        txtComplementoUsuario = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnEditarPerfil = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mnEmprestimos = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        mnPerfil = new javax.swing.JMenuItem();
-        mnNotificaçoes = new javax.swing.JMenuItem();
-        mnSair = new javax.swing.JMenuItem();
+        mnMenu = new javax.swing.JMenu();
+        mnMenuEmprestimos = new javax.swing.JMenuItem();
+        mnUsuario = new javax.swing.JMenu();
+        mnUsuarioPerfil = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
-        mnVoltar = new javax.swing.JMenu();
+        mnSair = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pergamum");
         setMinimumSize(new java.awt.Dimension(770, 503));
-        getContentPane().setLayout(null);
+        setResizable(false);
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Nome do Usuário");
-        jPanel2.add(jLabel7);
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 780, 30);
+        txtNomeUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtNomeUsuario.setText("Nome do Usuário");
+        jPanel2.add(txtNomeUsuario);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setText("Matricula/SIAPE");
-        jPanel1.add(jLabel5);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 30, 780, 30);
+        txtIdentificadorUsuario.setText("Matricula/SIAPE");
+        jPanel1.add(txtIdentificadorUsuario);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Telefone");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Celular Reserva");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("E-mail");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Celular");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Endereço");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Complemento");
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel9.setText("EmailUsr");
+        txtEmailUsuario.setText("EmailUsr");
 
-        jLabel10.setText("celularUsr");
+        txtCelularUsuario.setText("celularUsr");
 
-        jLabel11.setText("telefoneUsr");
+        txtCelularReserva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtCelularReserva.setText("telefoneUsr");
 
-        jLabel13.setText("enderecousr");
+        txtEndereçoUsuario.setText("endereçousr");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("CEP");
 
-        jLabel12.setText("cepUsr");
+        txtCEPUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtCEPUsuario.setText("cepUsr");
 
-        jLabel14.setText("complementoUsr");
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        txtComplementoUsuario.setText("complementoUsr");
+        txtComplementoUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -117,22 +142,38 @@ public class TelaPerfil extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel9)
+                    .addComponent(txtEmailUsuario)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(116, 116, 116)
+                    .addComponent(txtEndereçoUsuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtComplementoUsuario)
+                            .addComponent(jLabel8))
+                        .addGap(178, 178, 178))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCelularUsuario)
+                            .addComponent(jLabel6))
+                        .addGap(209, 209, 209)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtCEPUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(94, 94, 94))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtCelularReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(60, 60, 60))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,66 +185,64 @@ public class TelaPerfil extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel12)
-                        .addComponent(jLabel14))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtEmailUsuario)
+                    .addComponent(txtCelularUsuario)
+                    .addComponent(txtCelularReserva))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCEPUsuario)
+                            .addComponent(txtEndereçoUsuario)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtComplementoUsuario)))
                 .addGap(30, 30, 30))
         );
 
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(0, 70, 780, 190);
-
-        jMenu1.setText("Menu");
-
-        mnEmprestimos.setText("Empréstimos");
-        mnEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarPerfil.setText("Editar Perfil");
+        btnEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnEmprestimosActionPerformed(evt);
+                btnEditarPerfilActionPerformed(evt);
             }
         });
-        jMenu1.add(mnEmprestimos);
 
-        jMenuBar1.add(jMenu1);
+        mnMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book.png")); // NOI18N
+        mnMenu.setText("Menu");
 
-        jMenu2.setText("Usuário");
-
-        mnPerfil.setText("Perfil");
-        mnPerfil.addActionListener(new java.awt.event.ActionListener() {
+        mnMenuEmprestimos.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_addresses.png")); // NOI18N
+        mnMenuEmprestimos.setText("Empréstimos");
+        mnMenuEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnPerfilActionPerformed(evt);
+                mnMenuEmprestimosActionPerformed(evt);
             }
         });
-        jMenu2.add(mnPerfil);
+        mnMenu.add(mnMenuEmprestimos);
 
-        mnNotificaçoes.setText("Notificações");
-        mnNotificaçoes.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(mnMenu);
+
+        mnUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\status_online.png")); // NOI18N
+        mnUsuario.setText("Usuário");
+
+        mnUsuarioPerfil.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\pencil.png")); // NOI18N
+        mnUsuarioPerfil.setText("Perfil");
+        mnUsuarioPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnNotificaçoesActionPerformed(evt);
+                mnUsuarioPerfilActionPerformed(evt);
             }
         });
-        jMenu2.add(mnNotificaçoes);
+        mnUsuario.add(mnUsuarioPerfil);
 
-        mnSair.setText("Sair");
-        mnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnSairActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnSair);
+        jMenuBar1.add(mnUsuario);
 
-        jMenuBar1.add(jMenu2);
-
+        mnAjuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\help.png")); // NOI18N
         mnAjuda.setText("Ajuda");
         mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -212,80 +251,108 @@ public class TelaPerfil extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnAjuda);
 
-        mnVoltar.setText("Voltar");
-        mnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+        mnSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\stop.png")); // NOI18N
+        mnSair.setText("Sair");
+        mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mnVoltarMouseClicked(evt);
+                mnSairMouseClicked(evt);
             }
         });
-        jMenuBar1.add(mnVoltar);
+        jMenuBar1.add(mnSair);
 
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(340, 340, 340)
+                        .addComponent(btnEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnEditarPerfil)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEmprestimosActionPerformed
+    private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnEditarPerfilActionPerformed
+
+    private void mnMenuEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuEmprestimosActionPerformed
+
         dispose();
         TelaEmprestimos novaTela = new TelaEmprestimos();
         novaTela.setVisible(true);
-    }//GEN-LAST:event_mnEmprestimosActionPerformed
+    }//GEN-LAST:event_mnMenuEmprestimosActionPerformed
 
-    private void mnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPerfilActionPerformed
+    private void mnUsuarioPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsuarioPerfilActionPerformed
+
         dispose();
         TelaPerfil novaTela = new TelaPerfil();
         novaTela.setVisible(true);
-    }//GEN-LAST:event_mnPerfilActionPerformed
-
-    private void mnNotificaçoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNotificaçoesActionPerformed
-        dispose();
-        TelaNotificaçoes novaTela = new TelaNotificaçoes();
-        novaTela.setVisible(true);
-    }//GEN-LAST:event_mnNotificaçoesActionPerformed
-
-    private void mnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSairActionPerformed
-        int response = JOptionPane.showConfirmDialog(
-                        TelaPerfil.this,
-                        "Tem certeza que quer sair?",
-                        "Confirmação de Saída",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
-                );
-                if (response == JOptionPane.YES_OPTION) {
-                    
-                    System.clearProperty("nomeCompleto");
-                    System.clearProperty("matricula");
-                    System.clearProperty("email");
-                    System.clearProperty("cpf");
-                    System.clearProperty("celular");
-                    System.clearProperty("celularreserva");
-                    System.clearProperty("endereco");
-                    System.clearProperty("complemento");
-                    System.clearProperty("cep");
-                    System.clearProperty("senha");
-                    System.clearProperty("tipo");
-                    
-                    System.out.println("Logout realizado com sucesso!");
-                   
-                    dispose();
-                    TelaTipoLogin novaTela = new TelaTipoLogin();
-                    novaTela.setVisible(true);
-                    
-                }
-    }//GEN-LAST:event_mnSairActionPerformed
+        
+    }//GEN-LAST:event_mnUsuarioPerfilActionPerformed
 
     private void mnAjudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnAjudaMouseClicked
+
         dispose();
         TelaAjuda novaTela = new TelaAjuda();
         novaTela.setVisible(true);
+        
     }//GEN-LAST:event_mnAjudaMouseClicked
 
-    private void mnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnVoltarMouseClicked
-        dispose();
-        TelaPrincipal novaTela = new TelaPrincipal();
-        novaTela.setVisible(true);
-    }//GEN-LAST:event_mnVoltarMouseClicked
+    private void mnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSairMouseClicked
+
+        int response = JOptionPane.showConfirmDialog(
+            TelaPerfil.this,
+            "Tem certeza que quer sair?",
+            "Confirmação de Saída",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+        if (response == JOptionPane.YES_OPTION) {
+
+            System.clearProperty("nomeCompleto");
+            System.clearProperty("matricula");
+            System.clearProperty("email");
+            System.clearProperty("cpf");
+            System.clearProperty("celular");
+            System.clearProperty("celularreserva");
+            System.clearProperty("endereco");
+            System.clearProperty("complemento");
+            System.clearProperty("cep");
+            System.clearProperty("senha");
+            System.clearProperty("tipo");
+
+            System.out.println("Logout realizado com sucesso!");
+
+            dispose();
+            TelaTipoLogin novaTela = new TelaTipoLogin();
+            novaTela.setVisible(true);
+
+        }
+    }//GEN-LAST:event_mnSairMouseClicked
 
     /**
      * @param args the command line arguments
@@ -316,6 +383,10 @@ public class TelaPerfil extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -326,31 +397,31 @@ public class TelaPerfil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditarPerfil;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenu mnAjuda;
-    private javax.swing.JMenuItem mnEmprestimos;
-    private javax.swing.JMenuItem mnNotificaçoes;
-    private javax.swing.JMenuItem mnPerfil;
-    private javax.swing.JMenuItem mnSair;
-    private javax.swing.JMenu mnVoltar;
+    private javax.swing.JMenu mnMenu;
+    private javax.swing.JMenuItem mnMenuEmprestimos;
+    private javax.swing.JMenu mnSair;
+    private javax.swing.JMenu mnUsuario;
+    private javax.swing.JMenuItem mnUsuarioPerfil;
+    private javax.swing.JLabel txtCEPUsuario;
+    private javax.swing.JLabel txtCelularReserva;
+    private javax.swing.JLabel txtCelularUsuario;
+    private javax.swing.JLabel txtComplementoUsuario;
+    private javax.swing.JLabel txtEmailUsuario;
+    private javax.swing.JLabel txtEndereçoUsuario;
+    private javax.swing.JLabel txtIdentificadorUsuario;
+    private javax.swing.JLabel txtNomeUsuario;
     // End of variables declaration//GEN-END:variables
 }

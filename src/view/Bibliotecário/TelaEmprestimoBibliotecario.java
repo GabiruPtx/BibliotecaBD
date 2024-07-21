@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view.Bibliotecário;
-import view.*;
-import CustomTable.tableView;
+import dao.pedidoDAO;
 import javax.swing.JOptionPane;
 import view.TelaAjuda;
 import view.TelaPerfil;
-import view.TelaPrincipal;
 import view.TelaTipoLogin;
 /**
  *
@@ -36,21 +30,24 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableEmprestimos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mnEmprestimos = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mnMenu = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        mnMenuGerenciarAcervo = new javax.swing.JMenuItem();
+        mnMenuSolicitacoes = new javax.swing.JMenuItem();
+        mnCadastro = new javax.swing.JMenu();
+        mnCadastroUExterno = new javax.swing.JMenuItem();
+        mnCadastroUInterno = new javax.swing.JMenuItem();
+        mnUsuario = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        mnNotificaçoes = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        mnAjuda = new javax.swing.JMenu();
+        mnSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pergamum");
         setMinimumSize(new java.awt.Dimension(770, 503));
-        getContentPane().setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Empréstimos");
@@ -68,150 +65,219 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableEmprestimos);
 
+        jLabel1.setFont(new java.awt.Font("Meditative", 0, 24)); // NOI18N
+        jLabel1.setText("PERGAMUM");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\coruja.png")); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(337, 337, 337)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(376, 376, 376)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(340, 340, 340)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel1)
+                .addGap(2, 2, 2)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 780, 490);
+        mnMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book.png")); // NOI18N
+        mnMenu.setText("Menu");
 
-        jMenu1.setText("Menu");
+        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_addresses.png")); // NOI18N
+        jMenuItem5.setText("Empréstimos");
+        mnMenu.add(jMenuItem5);
 
-        mnEmprestimos.setText("Empréstimos");
-        mnEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+        mnMenuGerenciarAcervo.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_open.png")); // NOI18N
+        mnMenuGerenciarAcervo.setText("Gerenciar Acervo");
+        mnMenuGerenciarAcervo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnEmprestimosActionPerformed(evt);
+                mnMenuGerenciarAcervoActionPerformed(evt);
             }
         });
-        jMenu1.add(mnEmprestimos);
+        mnMenu.add(mnMenuGerenciarAcervo);
 
-        jMenuBar1.add(jMenu1);
+        mnMenuSolicitacoes.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_go.png")); // NOI18N
+        mnMenuSolicitacoes.setText("Solicitações");
+        mnMenuSolicitacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnMenuSolicitacoesActionPerformed(evt);
+            }
+        });
+        mnMenu.add(mnMenuSolicitacoes);
 
-        jMenu2.setText("Usuário");
+        jMenuBar1.add(mnMenu);
 
+        mnCadastro.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\group.png")); // NOI18N
+        mnCadastro.setText("Cadastro");
+
+        mnCadastroUExterno.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_orange.png")); // NOI18N
+        mnCadastroUExterno.setText("Cadastro de Usuário Externo");
+        mnCadastroUExterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastroUExternoActionPerformed(evt);
+            }
+        });
+        mnCadastro.add(mnCadastroUExterno);
+
+        mnCadastroUInterno.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_gray.png")); // NOI18N
+        mnCadastroUInterno.setText("Cadastro de Usuário Interno");
+        mnCadastroUInterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastroUInternoActionPerformed(evt);
+            }
+        });
+        mnCadastro.add(mnCadastroUInterno);
+
+        jMenuBar1.add(mnCadastro);
+
+        mnUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user.png")); // NOI18N
+        mnUsuario.setText("Usuário");
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\pencil.png")); // NOI18N
         jMenuItem3.setText("Perfil");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem3);
+        mnUsuario.add(jMenuItem3);
 
-        mnNotificaçoes.setText("Notificações");
-        mnNotificaçoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnNotificaçoesActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnNotificaçoes);
+        jMenuBar1.add(mnUsuario);
 
-        jMenuItem2.setText("Sair");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Ajuda");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+        mnAjuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\help.png")); // NOI18N
+        mnAjuda.setText("Ajuda");
+        mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
+                mnAjudaMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu4);
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(mnAjuda);
 
-        jMenu5.setText("Voltar");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        mnSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\stop.png")); // NOI18N
+        mnSair.setText("Sair");
+        mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu5MouseClicked(evt);
+                mnSairMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(mnSair);
 
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEmprestimosActionPerformed
+    private void mnMenuGerenciarAcervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuGerenciarAcervoActionPerformed
+
         dispose();
-        TelaEmprestimoBibliotecario novaTela = new TelaEmprestimoBibliotecario();
-        novaTela.setVisible(true);
-    }//GEN-LAST:event_mnEmprestimosActionPerformed
+        TelaGerenciaAcervo tela = new TelaGerenciaAcervo();
+        tela.setVisible(true);
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        int response = JOptionPane.showConfirmDialog(TelaEmprestimoBibliotecario.this,
-                        "Tem certeza que quer sair?",
-                        "Confirmação de Saída",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
-                );
-                if (response == JOptionPane.YES_OPTION) {
-                    
-                    System.clearProperty("nomeCompleto");
-                    System.clearProperty("matricula");
-                    System.clearProperty("email");
-                    System.clearProperty("cpf");
-                    System.clearProperty("celular");
-                    System.clearProperty("celularreserva");
-                    System.clearProperty("endereco");
-                    System.clearProperty("complemento");
-                    System.clearProperty("cep");
-                    System.clearProperty("senha");
-                    System.clearProperty("tipo");
-                    
-                    System.out.println("Logout realizado com sucesso!");
-                   
-                    dispose();
-                    TelaTipoLogin novaTela = new TelaTipoLogin();
-                    novaTela.setVisible(true);
-                }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnMenuGerenciarAcervoActionPerformed
 
-    private void mnNotificaçoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNotificaçoesActionPerformed
-        
-    }//GEN-LAST:event_mnNotificaçoesActionPerformed
+    private void mnMenuSolicitacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuSolicitacoesActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        dispose();
-        TelaPerfil novaTela = new TelaPerfil();
-        novaTela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        pedidoDAO pDAO = new pedidoDAO();
+        boolean pedido = pDAO.checarPedidosPendentes();
 
-    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        if(pedido == true){
+
+            TelaSolicitacao tela = new TelaSolicitacao();
+            tela.setVisible(true);
+
+        }else{
+
+            JOptionPane.showMessageDialog(this, "Não há nenhuma solicitação pendente no momento!");
+
+        }
+
+    }//GEN-LAST:event_mnMenuSolicitacoesActionPerformed
+
+    private void mnCadastroUExternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroUExternoActionPerformed
+
+        TelaCadastroUsuarioExterno tela = new TelaCadastroUsuarioExterno();
+        tela.setVisible(true);
+
+    }//GEN-LAST:event_mnCadastroUExternoActionPerformed
+
+    private void mnCadastroUInternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroUInternoActionPerformed
+
+        TelaCadastroBibliotecario frame = new TelaCadastroBibliotecario();
+        frame.setVisible(true);
+
+    }//GEN-LAST:event_mnCadastroUInternoActionPerformed
+
+    private void mnAjudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnAjudaMouseClicked
+
         dispose();
         TelaAjuda novaTela = new TelaAjuda();
         novaTela.setVisible(true);
-    }//GEN-LAST:event_jMenu4MouseClicked
 
-    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        dispose();
-        TelaPrincipal novaTela = new TelaPrincipal();
-        novaTela.setVisible(true);
-    }//GEN-LAST:event_jMenu5MouseClicked
+    }//GEN-LAST:event_mnAjudaMouseClicked
+
+    private void mnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSairMouseClicked
+
+        int response = JOptionPane.showConfirmDialog(
+            TelaEmprestimoBibliotecario.this,
+            "Tem certeza que quer sair?",
+            "Confirmação de Saída",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+        if (response == JOptionPane.YES_OPTION) {
+
+            System.clearProperty("nomeCompleto");
+            System.clearProperty("matricula");
+            System.clearProperty("email");
+            System.clearProperty("cpf");
+            System.clearProperty("celular");
+            System.clearProperty("celularreserva");
+            System.clearProperty("endereco");
+            System.clearProperty("complemento");
+            System.clearProperty("cep");
+            System.clearProperty("senha");
+            System.clearProperty("tipo");
+
+            System.out.println("Logout realizado com sucesso!");
+
+            dispose();
+            TelaTipoLogin novaTela = new TelaTipoLogin();
+            novaTela.setVisible(true);
+
+        }
+
+    }//GEN-LAST:event_mnSairMouseClicked
 
     /**
      * @param args the command line arguments
@@ -280,19 +346,23 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuItem mnEmprestimos;
-    private javax.swing.JMenuItem mnNotificaçoes;
+    private javax.swing.JMenu mnAjuda;
+    private javax.swing.JMenu mnCadastro;
+    private javax.swing.JMenuItem mnCadastroUExterno;
+    private javax.swing.JMenuItem mnCadastroUInterno;
+    private javax.swing.JMenu mnMenu;
+    private javax.swing.JMenuItem mnMenuGerenciarAcervo;
+    private javax.swing.JMenuItem mnMenuSolicitacoes;
+    private javax.swing.JMenu mnSair;
+    private javax.swing.JMenu mnUsuario;
     private javax.swing.JTable tableEmprestimos;
     // End of variables declaration//GEN-END:variables
 }

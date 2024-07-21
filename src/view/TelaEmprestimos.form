@@ -34,14 +34,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnUsuarioPerfilActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnUsuarioNotificacao">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\bell.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Notifica&#xe7;&#xf5;es"/>
-              </Properties>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnAjuda">

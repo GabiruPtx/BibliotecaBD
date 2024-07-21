@@ -1,6 +1,5 @@
 package view;
 
-import view.Professor.TelaPrincipalProfessor;
 import beans.usuário;
 import dao.usuárioDAO;
 import java.awt.Color;
@@ -285,7 +284,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     System.setProperty("tipo", user.getTipo());
                     
                     
-                    TelaPrincipalProfessor principal = new TelaPrincipalProfessor();
+                    TelaPrincipal principal = new TelaPrincipal();
                     principal.setVisible(true);
                     this.setVisible(false);
                 

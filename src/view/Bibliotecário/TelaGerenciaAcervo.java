@@ -2,10 +2,13 @@ package view.Bibliotecário;
 
 import beans.exemplar;
 import dao.exemplarDAO;
+import dao.pedidoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.TelaAjuda;
+import view.TelaPerfil;
+import view.Bibliotecário.TelaEmprestimoBibliotecario;
 import view.TelaTipoLogin;
 
 public class TelaGerenciaAcervo extends javax.swing.JFrame {
@@ -59,13 +62,12 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnMenu = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        mnMenuSolicitações = new javax.swing.JMenuItem();
         mnCadastro = new javax.swing.JMenu();
         mnCadastroUExterno = new javax.swing.JMenuItem();
         mnCadastroUInterno = new javax.swing.JMenuItem();
         mnUsuario = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
         mnSair = new javax.swing.JMenu();
 
@@ -131,11 +133,21 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_addresses.png")); // NOI18N
         jMenuItem5.setText("Empréstimos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         mnMenu.add(jMenuItem5);
 
-        jMenuItem10.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_go.png")); // NOI18N
-        jMenuItem10.setText("Solicitações");
-        mnMenu.add(jMenuItem10);
+        mnMenuSolicitações.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_go.png")); // NOI18N
+        mnMenuSolicitações.setText("Solicitações");
+        mnMenuSolicitações.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnMenuSolicitaçõesActionPerformed(evt);
+            }
+        });
+        mnMenu.add(mnMenuSolicitações);
 
         jMenuBar1.add(mnMenu);
 
@@ -167,11 +179,12 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\pencil.png")); // NOI18N
         jMenuItem3.setText("Perfil");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         mnUsuario.add(jMenuItem3);
-
-        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\bell.png")); // NOI18N
-        jMenuItem4.setText("Notificação");
-        mnUsuario.add(jMenuItem4);
 
         jMenuBar1.add(mnUsuario);
 
@@ -257,8 +270,18 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMaterialActionPerformed
+      
         
         TelaCadastroObra novaTela = new TelaCadastroObra();
+        novaTela.addWindowListener(new java.awt.event.WindowAdapter() {
+        
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+            
+            preencheTabela();
+            
+        }
+    });
         novaTela.setVisible(true);
         
     }//GEN-LAST:event_btnAdicionarMaterialActionPerformed
@@ -274,6 +297,15 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     private void btnRemoverMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMaterialActionPerformed
         
         TelaRemoveObra novaTela = new TelaRemoveObra();
+        novaTela.addWindowListener(new java.awt.event.WindowAdapter() {
+        
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+            
+            preencheTabela();
+            
+        }
+    });
         novaTela.setVisible(true);
         
     }//GEN-LAST:event_btnRemoverMaterialActionPerformed
@@ -343,12 +375,30 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
             
             
             TelaAdicionarExemplar frame = new TelaAdicionarExemplar();
+            frame.addWindowListener(new java.awt.event.WindowAdapter() {
+        
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+            
+            preencheTabela();
+            
+        }
+    });
             frame.setVisible(true);
             
             
         }else {
             
             TelaAdicionarExemplarV2 frame = new TelaAdicionarExemplarV2();
+            frame.addWindowListener(new java.awt.event.WindowAdapter() {
+        
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+            
+            preencheTabela();
+            
+        }
+    });
             frame.setVisible(true);
             
         }
@@ -358,9 +408,50 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     private void btnRemoverExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverExemplaresActionPerformed
        
         TelaRemoverExemplar tela = new TelaRemoverExemplar();
+        tela.addWindowListener(new java.awt.event.WindowAdapter() {
+        
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+            
+            preencheTabela();
+            
+        }
+    });
         tela.setVisible(true);
         
     }//GEN-LAST:event_btnRemoverExemplaresActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        
+        TelaPerfil perfil = new TelaPerfil();
+        perfil.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        
+        TelaEmprestimoBibliotecario tela = new TelaEmprestimoBibliotecario();
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void mnMenuSolicitaçõesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuSolicitaçõesActionPerformed
+         
+        pedidoDAO pDAO = new pedidoDAO();
+        boolean pedido = pDAO.checarPedidosPendentes();
+        
+        if(pedido == true){
+            
+            TelaSolicitacao tela = new TelaSolicitacao();
+            tela.setVisible(true);
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(this, "Não há nenhuma solicitação pendente no momento!");
+            
+        }
+        
+    }//GEN-LAST:event_mnMenuSolicitaçõesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,9 +496,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -416,6 +505,7 @@ public class TelaGerenciaAcervo extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnCadastroUExterno;
     private javax.swing.JMenuItem mnCadastroUInterno;
     private javax.swing.JMenu mnMenu;
+    private javax.swing.JMenuItem mnMenuSolicitações;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
     private javax.swing.JTable tblExemplares;

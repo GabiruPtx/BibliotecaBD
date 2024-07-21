@@ -21,6 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     for (material m : listaMaterial) {
         Object[] obj = new Object[]{
+            m.getId(),
             m.getTítulo(),
             m.getAutor(),
             m.getAnoPublicacao(),
@@ -91,7 +92,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mnMenuEmprestimos = new javax.swing.JMenuItem();
         mnUsuario = new javax.swing.JMenu();
         mnUsuarioPerfil = new javax.swing.JMenuItem();
-        mnUsuarioNotificacao = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
         mnSair = new javax.swing.JMenu();
 
@@ -114,28 +114,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo"
+                "ID do material", "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblMateriais);
@@ -182,10 +175,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         mnUsuario.add(mnUsuarioPerfil);
-
-        mnUsuarioNotificacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\bell.png")); // NOI18N
-        mnUsuarioNotificacao.setText("Notificações");
-        mnUsuario.add(mnUsuarioNotificacao);
 
         jMenuBar1.add(mnUsuario);
 
@@ -263,7 +252,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void mnUsuarioPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsuarioPerfilActionPerformed
         
-        dispose();
         TelaPerfil novaTela = new TelaPerfil();
         novaTela.setVisible(true);
         
@@ -372,7 +360,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnMenuEmprestimos;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
-    private javax.swing.JMenuItem mnUsuarioNotificacao;
     private javax.swing.JMenuItem mnUsuarioPerfil;
     private javax.swing.JTable tblMateriais;
     private javax.swing.JTextField txtBusca;
