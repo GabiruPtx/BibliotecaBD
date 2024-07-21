@@ -1,5 +1,7 @@
 package view;
 
+import beans.emprestimo;
+import dao.emprestimoDAO;
 import dao.pedidoDAO;
 import javax.swing.JOptionPane;
 
@@ -129,22 +131,30 @@ public class TelaEstenderPrazo extends javax.swing.JFrame {
         int idEmprestimo = Integer.parseInt(txtIdEmpréstimo.getText());
         String diasEmprestimo = (String) boxDiasPrazo.getSelectedItem();
         
+         pedidoDAO pDAO = new pedidoDAO();
+        emprestimoDAO eDAO = new emprestimoDAO();
+    
+    try {
+        // Verifica as chances de renovação do empréstimo
+        emprestimo e = eDAO.checarChances(idEmprestimo);
         
-        pedidoDAO pDAO = new pedidoDAO();
-        
-        try{
-            
+        if (e != null && e.getChancesDePrazo() > 0) {
+            // Se houver chances de renovação, solicita a extensão
             pDAO.solicitarExtensão(idEmprestimo, diasEmprestimo);
             JOptionPane.showMessageDialog(this, "Pedido de extensão realizado com sucesso!");
-            dispose();
-            
-        } catch (Exception e){
-            
-            JOptionPane.showMessageDialog(this, "Não foi possível realizar seu pedido. Talvez você tenha esgotado o número de extensões!");
-            dispose();
-            
+        } else {
+            // Se não houver chances de renovação, exibe uma mensagem de erro
+            JOptionPane.showMessageDialog(this, "Número máximo de extensões atingido! Não é possível solicitar mais extensões.");
         }
         
+    } catch (Exception e) {
+        // Captura exceções e exibe uma mensagem de erro apropriada
+        JOptionPane.showMessageDialog(this, "Não foi possível realizar seu pedido. Verifique se o ID do empréstimo está correto e tente novamente.");
+        e.printStackTrace();
+    } finally {
+        // Fecha a tela independente do sucesso ou falha
+        dispose();
+    }
         
     }//GEN-LAST:event_btnEnviarPedidoActionPerformed
 

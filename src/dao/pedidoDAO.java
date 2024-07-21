@@ -7,6 +7,8 @@ import conection.Conection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class pedidoDAO {
@@ -25,9 +27,12 @@ public class pedidoDAO {
         
         String sqlBuscaMaterial = "SELECT id FROM material WHERE Titulo = ?";
         String sqlBuscaExemplar = "SELECT id FROM exemplar WHERE material_id = ? AND status = 'DISPONIVEL' LIMIT 1";
-        String sqlInserirPedido = "INSERT INTO pedido (tituloMaterial, usuario_Nome, exemplar_id, tipoPedido) VALUES (?, ?, ?, ?)";
+        String sql = "SELECT tipo FROM usuário WHERE nomeCompleto = ?";
+        String sqlInserirPedido = "INSERT INTO pedido (tituloMaterial, usuario_Nome, exemplar_id, tipoPedido, tipoUsuario) VALUES (?, ?, ?, ?, ?)";
         String titulo = tituloMaterial;
+        
     try {
+        
         conn.setAutoCommit(false);
 
         // Busca o ID do material pelo título
@@ -67,6 +72,26 @@ public class pedidoDAO {
                 }
             }
         }
+        
+        //Busca tipo do usuário.
+        String userTipo  = null;
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, userName);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                
+                if (rs.next()) {
+                    
+                    userTipo = rs.getString("tipo");
+                    
+                } else {
+                    
+                    throw new SQLException("Tipo não encontrado.");
+                    
+                }
+            }
+        }
 
         // Insere um novo pedido
         try (PreparedStatement stmtPedido = conn.prepareStatement(sqlInserirPedido)) {
@@ -75,6 +100,7 @@ public class pedidoDAO {
             stmtPedido.setString(2, userName);
             stmtPedido.setInt(3, exemplarId);
             stmtPedido.setString(4, "EMPRESTIMO");
+            stmtPedido.setString(5, userTipo);
             stmtPedido.executeUpdate();
         }
 
@@ -143,6 +169,7 @@ public class pedidoDAO {
                 pedido.setTipoPedido(rs.getString("tipoPedido"));
                 pedido.setExtensaoPrazo(rs.getInt("extensaoPrazo"));
                 pedido.setIdEmprestimo(rs.getInt("idEmprestimo"));
+                pedido.setTipoUsuario(rs.getString("tipoUsuario"));
                 
             }
         } catch (SQLException e) {
@@ -202,8 +229,8 @@ public class pedidoDAO {
     public void solicitarExtensão(int id, String DiasPrazo){
         
         String sqlBuscaEmprestimo = "SELECT * FROM emprestimo WHERE id = ?";
-        String sqlInserirPedido = "INSERT INTO pedido (tituloMaterial, usuario_Nome, exemplar_id, tipoPedido, idEmprestimo, extensaoPrazo) VALUES (?, ?, ?, ?, ?, ?)";
-        
+        String sqlInserirPedido = "INSERT INTO pedido (tituloMaterial, usuario_Nome, exemplar_id, tipoPedido, idEmprestimo, extensaoPrazo, tipoUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "SELECT tipo FROM usuário WHERE nomeCompleto = ?";
         
         try {
         conn.setAutoCommit(false);
@@ -235,7 +262,26 @@ public class pedidoDAO {
                 }
             }
         }
-
+        
+        String userTipo  = null;
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, emprestimo.getUENome());
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                
+                if (rs.next()) {
+                    
+                    userTipo = rs.getString("tipo");
+                    
+                } else {
+                    
+                    throw new SQLException("Tipo não encontrado.");
+                    
+                }
+            }
+        }
+        
         // Insere um novo pedido
         try (PreparedStatement stmtPedido = conn.prepareStatement(sqlInserirPedido)) {
             
@@ -245,6 +291,7 @@ public class pedidoDAO {
             stmtPedido.setString(4, "PRAZO");
             stmtPedido.setInt(5, emprestimo.getId());
             stmtPedido.setInt(6, Integer.parseInt(DiasPrazo));
+            stmtPedido.setString(7, userTipo);
             stmtPedido.executeUpdate();
             
         }
@@ -280,7 +327,7 @@ public class pedidoDAO {
         
     }
     
-    public void rejeitarPedido(pedido pedido){
+    public boolean rejeitarPedido(pedido pedido){
         
         String sql = "UPDATE pedido SET status = 'REJEITADO' WHERE id = ?";
         
@@ -296,7 +343,8 @@ public class pedidoDAO {
 
         conn.commit();
         System.out.println("Status de pedido atualizado!");
-
+        return true;
+        
     } catch (SQLException e) {
         
         try {
@@ -322,7 +370,74 @@ public class pedidoDAO {
             
         }
     }
+        return false;
+    }
+    
+    public List<pedido> preencherTabelaPedido() {
+    
+        String sql = "SELECT * FROM pedido";
+
+    try {
+        
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        List<pedido> listaPedido = new ArrayList<>();
+        while (rs.next()) {
+            
+            pedido p = new pedido();
+            p.setId(rs.getInt("id"));
+            p.setUserName(rs.getString("usuario_Nome"));
+            p.setIdEmprestimo(rs.getInt("idEmprestimo"));
+            p.setTitulo(rs.getString("tituloMaterial"));
+            p.setExemplarId(rs.getInt("exemplar_id"));
+            p.setTipoPedido(rs.getString("tipoPedido"));
+            p.setStatus(rs.getString("status"));
+            p.setExtensaoPrazo(rs.getInt("extensaoPrazo"));
+            
+            listaPedido.add(p);
+        }
+        return listaPedido;
+        
+    } catch (Exception e) {
+        
+        e.printStackTrace();
+        return null;
         
     }
+}
+    
+    public List<pedido> preencherTabelaPedidoUsuario(String usuario) {
+    
+        String sql = "SELECT * FROM pedido WHERE usuario_Nome = ?";
+
+    try {
+        
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        stmt.setString(1, usuario);
+        ResultSet rs = stmt.executeQuery();
+        List<pedido> listaPedido = new ArrayList<>();
+        while (rs.next()) {
+            
+            pedido p = new pedido();
+            p.setId(rs.getInt("id"));
+            p.setUserName(rs.getString("usuario_Nome"));
+            p.setIdEmprestimo(rs.getInt("idEmprestimo"));
+            p.setTitulo(rs.getString("tituloMaterial"));
+            p.setExemplarId(rs.getInt("exemplar_id"));
+            p.setTipoPedido(rs.getString("tipoPedido"));
+            p.setStatus(rs.getString("status"));
+            p.setExtensaoPrazo(rs.getInt("extensaoPrazo"));
+            
+            listaPedido.add(p);
+        }
+        return listaPedido;
+        
+    } catch (Exception e) {
+        
+        e.printStackTrace();
+        return null;
+        
+    }
+}
     
 }

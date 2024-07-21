@@ -10,6 +10,7 @@ public class pedido {
     private String status;
     private int extensaoPrazo;
     private int idEmprestimo;
+    private String tipoUsuario;
 
     public int getId() {
         return id;
@@ -73,6 +74,14 @@ public class pedido {
 
     public void setIdEmprestimo(int idEmprestimo) {
         this.idEmprestimo = idEmprestimo;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
     
     

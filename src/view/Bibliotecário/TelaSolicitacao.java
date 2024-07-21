@@ -187,38 +187,47 @@ private void configurarTela(pedido pedido) {
 
         try{
             
+            boolean sucesso = false;
+            
             if( pedido.getTipoPedido().equals("EMPRESTIMO")){
                 
-
-                eDAO.autorizarEmprestimo(pedido);
-                JOptionPane.showMessageDialog(this, "O empréstimo foi autorizado com sucesso!.");
-                pDAO.autorizarPedido(pedido);
-                JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
-                dispose();  
+                sucesso = eDAO.autorizarEmprestimo(pedido);
+                if (sucesso) {
+                    
+                    JOptionPane.showMessageDialog(this, "O empréstimo foi autorizado com sucesso!");
+                    
+                } else {
+                    
+                    JOptionPane.showMessageDialog(this, "Houve um problema ao registrar o empréstimo.");
+                    
+                }
                 
-            }else{
+            } else {
+                
+                sucesso = eDAO.estenderPrazo(pedido);
+                
+                if (sucesso) {
                
-
-               eDAO.estenderPrazo(pedido);
-               JOptionPane.showMessageDialog(this, "A extensão do empréstimo foi autorizado com sucesso!.");
-               pDAO.autorizarPedido(pedido);
-               JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!.");
-               dispose(); 
-               
+                    JOptionPane.showMessageDialog(this, "A extensão do empréstimo foi autorizada com sucesso!");
+                
+                } else {
+                    
+                    JOptionPane.showMessageDialog(this, "Houve um problema ao atualizar o prazo do empréstimo.");
+                    
+                }
             }
-            
+
+            if (sucesso) {
+                
+                pDAO.autorizarPedido(pedido);
+                JOptionPane.showMessageDialog(this, "O status do pedido foi atualizado!");
+                dispose();
+            }
             
         }catch(Exception e){
             
-            if(pedido.getTipoPedido().equals("EMPRESTIMO")){
-                
-                JOptionPane.showMessageDialog(this, "Houve um problema ao registrar o empréstimo.");
-                
-            }else{
-                
-                JOptionPane.showMessageDialog(this, "Houve um problema ao atualizar o prazo do empréstimo.");
-                
-            }
+            e.printStackTrace(); // Log do erro para depuração
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro durante o processo.");
             
         }
         

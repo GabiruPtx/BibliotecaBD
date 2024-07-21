@@ -82,8 +82,6 @@ public class emprestimo {
         this.status = status;
     }
 
-    
-
     public int getChancesDePrazo() {
         return chancesDePrazo;
     }

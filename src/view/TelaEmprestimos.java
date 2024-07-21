@@ -1,22 +1,69 @@
 package view;
 
-import CustomTable.tableView;
+import beans.emprestimo;
+import beans.pedido;
+import dao.emprestimoDAO;
+import dao.pedidoDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import view.TelaAjuda;
 import view.TelaPerfil;
 import view.TelaPrincipal;
 import view.TelaTipoLogin;
-/**
- *
- * @author usuario
- */
-public class TelaEmprestimos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
+public class TelaEmprestimos extends javax.swing.JFrame {
+    
+    String usuario = System.getProperty("nomeCompleto");
+    
+    private void preencheSolicitacaoUsuario(String usuario) {
+    pedidoDAO pDAO = new pedidoDAO();
+    List<pedido> listaPedido = pDAO.preencherTabelaPedidoUsuario(usuario);
+
+    DefaultTableModel tabelaPedido = (DefaultTableModel) tblSolicitacoes.getModel();
+    tabelaPedido.setNumRows(0);
+
+    for (pedido p : listaPedido) {
+        Object[] obj = new Object[]{
+            p.getId(),
+            p.getTitulo(),
+            p.getTipoPedido(),
+            p.getStatus()
+                
+        };
+        tabelaPedido.addRow(obj);
+    }
+}
+    
+    private void preencheEmprestimoUsuario(String usuario) {
+        
+    emprestimoDAO eDAO = new emprestimoDAO();
+    List<emprestimo> listaEmprestimo = eDAO.preencherTabelaEmprestimoUsuario(usuario);
+
+    DefaultTableModel tabelaEmprestimo = (DefaultTableModel) tblEmprestimos.getModel();
+    tabelaEmprestimo.setNumRows(0);
+
+    for (emprestimo e : listaEmprestimo) {
+        Object[] obj = new Object[]{
+            e.getId(),
+            e.getTitulo(),
+            e.getDataEmprestimo(),
+            e.getDataDevolucao(),
+            e.getStatus(),
+            e.getChancesDePrazo()  
+                
+        };
+        tabelaEmprestimo.addRow(obj);
+    }
+}
+    
+    
     public TelaEmprestimos() {
+        
         initComponents();
+        preencheSolicitacaoUsuario(usuario);
+        preencheEmprestimoUsuario(usuario);
+        
     }
 
     /**
@@ -31,13 +78,13 @@ public class TelaEmprestimos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableEmprestimos = new javax.swing.JTable();
+        tblEmprestimos = new javax.swing.JTable();
         bntSolicitarEmprestimos = new javax.swing.JButton();
         btnEstenderPrazo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblSolicitacoes = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -56,7 +103,7 @@ public class TelaEmprestimos extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Empréstimos");
 
-        tableEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -75,7 +122,7 @@ public class TelaEmprestimos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableEmprestimos);
+        jScrollPane1.setViewportView(tblEmprestimos);
 
         bntSolicitarEmprestimos.setText("Solicitar Empréstimos");
         bntSolicitarEmprestimos.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +143,7 @@ public class TelaEmprestimos extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\coruja.png")); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblSolicitacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -115,7 +162,7 @@ public class TelaEmprestimos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblSolicitacoes);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Empréstimos");
@@ -293,15 +340,34 @@ public class TelaEmprestimos extends javax.swing.JFrame {
 
     private void bntSolicitarEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSolicitarEmprestimosActionPerformed
        
-        TelaSolicitacaoEmprestimo tela = new TelaSolicitacaoEmprestimo();
-        tela.setVisible(true);
+    TelaSolicitacaoEmprestimo tela = new TelaSolicitacaoEmprestimo();
+    tela.addWindowListener(new java.awt.event.WindowAdapter() {
+            
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                
+            preencheSolicitacaoUsuario(usuario);
+                
+        }
+    });
+    tela.setVisible(true);
         
     }//GEN-LAST:event_bntSolicitarEmprestimosActionPerformed
 
     private void btnEstenderPrazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstenderPrazoActionPerformed
+
+    
+    TelaEstenderPrazo tela = new TelaEstenderPrazo();
+    tela.addWindowListener(new java.awt.event.WindowAdapter() {
         
-        TelaEstenderPrazo tela = new TelaEstenderPrazo();
-        tela.setVisible(true);
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+            
+            preencheSolicitacaoUsuario(usuario);
+            
+        }
+    });
+    tela.setVisible(true);
         
     }//GEN-LAST:event_btnEstenderPrazoActionPerformed
 
@@ -361,13 +427,13 @@ public class TelaEmprestimos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnMenu;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
     private javax.swing.JMenuItem mnUsuarioNotificacao;
     private javax.swing.JMenuItem mnUsuarioPerfil;
-    private javax.swing.JTable tableEmprestimos;
+    private javax.swing.JTable tblEmprestimos;
+    private javax.swing.JTable tblSolicitacoes;
     // End of variables declaration//GEN-END:variables
 }
