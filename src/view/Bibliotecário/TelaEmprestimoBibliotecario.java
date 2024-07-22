@@ -1,6 +1,11 @@
 package view.Bibliotecário;
+import beans.emprestimo;
+import beans.pedido;
+import dao.emprestimoDAO;
 import dao.pedidoDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import view.TelaAjuda;
 import view.TelaPerfil;
 import view.TelaTipoLogin;
@@ -10,11 +15,34 @@ import view.TelaTipoLogin;
  */
 public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
+    private void preencheTabelaEmprestimo() {
+        
+        emprestimoDAO eDAO = new emprestimoDAO();
+        List<emprestimo> listaEmprestimo = eDAO.preencherTabelaEmprestimo();
+
+    DefaultTableModel tabelaEmprestimo = (DefaultTableModel) tblEmprestimo.getModel();
+    tabelaEmprestimo.setNumRows(0);
+
+    for (emprestimo e : listaEmprestimo) {
+        Object[] obj = new Object[]{
+            
+            e.getId(),
+            e.getTitulo(),
+            e.getUENome(),
+            e.getUINome(),
+            e.getDataEmprestimo(),
+            e.getDataDevolucao(),
+            e.getStatus(),
+            e.getChancesDePrazo()
+                
+        };
+        tabelaEmprestimo.addRow(obj);
+    }
+}
+    
     public TelaEmprestimoBibliotecario() {
         initComponents();
+        preencheTabelaEmprestimo();
     }
 
     /**
@@ -28,8 +56,8 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableEmprestimos = new javax.swing.JTable();
+        scroll = new javax.swing.JScrollPane();
+        tblEmprestimo = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -45,25 +73,25 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
         mnAjuda = new javax.swing.JMenu();
         mnSair = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pergamum");
         setMinimumSize(new java.awt.Dimension(770, 503));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Empréstimos");
 
-        tableEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Título", "Data de Empréstimo", "Data de Devolução", "Status", "Renovar Prazo"
+                "ID", "Título", "Solicitante", "Autorizador", "Data de Empréstimo", "Data de Devolução", "Status", "Renovar Prazo"
             }
         ));
-        jScrollPane1.setViewportView(tableEmprestimos);
+        scroll.setViewportView(tblEmprestimo);
 
         jLabel1.setFont(new java.awt.Font("Meditative", 0, 24)); // NOI18N
         jLabel1.setText("PERGAMUM");
@@ -87,7 +115,7 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
                         .addComponent(jLabel7))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -100,7 +128,7 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel7)
                 .addGap(60, 60, 60)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -353,7 +381,6 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
     private javax.swing.JMenuItem mnCadastroUExterno;
@@ -363,6 +390,7 @@ public class TelaEmprestimoBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnMenuSolicitacoes;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnUsuario;
-    private javax.swing.JTable tableEmprestimos;
+    private javax.swing.JScrollPane scroll;
+    private javax.swing.JTable tblEmprestimo;
     // End of variables declaration//GEN-END:variables
 }

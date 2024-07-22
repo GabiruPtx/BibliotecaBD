@@ -295,7 +295,8 @@ public class TelaPerfil extends javax.swing.JFrame {
 
     private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
         
-        
+        TelaEditarPerfil tela = new TelaEditarPerfil();
+        tela.setVisible(true);
         
     }//GEN-LAST:event_btnEditarPerfilActionPerformed
 

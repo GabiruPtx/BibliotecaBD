@@ -313,10 +313,7 @@ public class TelaCadastroBibliotecario extends javax.swing.JFrame {
                 txtComplemento.setText("");
                 txtCEP.setText("");
                 txtSenha.setText("");
-        
-                TelaPrincipalBibliotecario principal = new TelaPrincipalBibliotecario();
-                principal.setVisible(true);
-                this.setVisible(false);
+                txtConfirmarSenha.setText("");
             
         } else {
         

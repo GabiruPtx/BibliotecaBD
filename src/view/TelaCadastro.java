@@ -327,6 +327,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 txtComplemento.setText("");
                 txtCEP.setText("");
                 txtSenha.setText("");
+                txtConfirmarSenha.setText("");
         
                 System.setProperty("nomeCompleto", user.getNomeCompleto());
                 System.setProperty("matricula", user.getMatrícula());
@@ -373,6 +374,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 txtComplemento.setText("");
                 txtCEP.setText("");
                 txtSenha.setText("");
+                txtConfirmarSenha.setText("");
         
                 System.setProperty("nomeCompleto", user.getNomeCompleto());
                 System.setProperty("matricula", user.getMatrícula());

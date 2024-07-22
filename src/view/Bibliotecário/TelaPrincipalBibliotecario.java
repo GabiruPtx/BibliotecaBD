@@ -23,6 +23,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
     for (material m : listaMaterial) {
         Object[] obj = new Object[]{
+            
             m.getId(),
             m.getTítulo(),
             m.getAutor(),
@@ -50,6 +51,8 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         for (material m : buscaMaterial) {
             Object[] obj = new Object[]{
+                
+                m.getId(),
                 m.getTítulo(),
                 m.getAutor(),
                 m.getAnoPublicacao(),
@@ -375,6 +378,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
     private void mnMenuEmpréstimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMenuEmpréstimosActionPerformed
          
+        dispose();
         TelaEmprestimoBibliotecario tela = new TelaEmprestimoBibliotecario();
         tela.setVisible(true);
         

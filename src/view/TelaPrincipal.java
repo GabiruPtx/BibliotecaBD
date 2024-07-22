@@ -21,7 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     for (material m : listaMaterial) {
         Object[] obj = new Object[]{
-            m.getId(),
+
             m.getTítulo(),
             m.getAutor(),
             m.getAnoPublicacao(),
@@ -114,17 +114,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID do material", "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo"
+                "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {

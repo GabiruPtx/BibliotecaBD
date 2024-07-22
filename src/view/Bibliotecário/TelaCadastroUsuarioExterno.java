@@ -318,10 +318,8 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
                 txtComplemento.setText("");
                 txtCEP.setText("");
                 txtSenha.setText("");
+                txtConfirmarSenha.setText("");
         
-                TelaPrincipalBibliotecario principal = new TelaPrincipalBibliotecario();
-                principal.setVisible(true);
-                this.setVisible(false);
             
         } else{
             
@@ -353,10 +351,7 @@ public class TelaCadastroUsuarioExterno extends javax.swing.JFrame {
                 txtCEP.setText("");
                 txtSenha.setText("");
         
-                TelaPrincipalBibliotecario principal = new TelaPrincipalBibliotecario();
-                principal.setVisible(true);
-                this.setVisible(false);
-            
+                
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
