@@ -6,12 +6,6 @@ package view;
 
 import javax.swing.JOptionPane;
 import view.Bibliotecário.TelaPrincipalBibliotecario;
-import view.TelaEmprestimos;
-import view.TelaEmprestimos;
-import view.TelaPrincipal;
-import view.TelaPrincipal;
-import view.TelaTipoLogin;
-import view.TelaTipoLogin;
 
 /**
  *

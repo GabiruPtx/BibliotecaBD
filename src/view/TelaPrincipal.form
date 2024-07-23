@@ -6,17 +6,11 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mnMenu">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\book.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Menu"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnMenuEmprestimos">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\book_addresses.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Empr&#xe9;stimos"/>
               </Properties>
               <Events>
@@ -27,17 +21,11 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnUsuario">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\status_online.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnUsuarioPerfil">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\pencil.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Perfil"/>
               </Properties>
               <Events>
@@ -48,9 +36,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnAjuda">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\help.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Ajuda"/>
           </Properties>
           <Events>
@@ -59,9 +44,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnSair">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\stop.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
           <Events>
@@ -172,14 +154,24 @@
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="11">
             <StringItem index="0" value="Ordenar"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+            <StringItem index="1" value="ID do material"/>
+            <StringItem index="2" value="T&#xed;tulo"/>
+            <StringItem index="3" value="Autor"/>
+            <StringItem index="4" value="Ano de publica&#xe7;&#xe3;o"/>
+            <StringItem index="5" value="Editora"/>
+            <StringItem index="6" value="G&#xea;nero"/>
+            <StringItem index="7" value="Revista"/>
+            <StringItem index="8" value="Volume"/>
+            <StringItem index="9" value="Resumo"/>
+            <StringItem index="10" value="Tipo"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -262,11 +254,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="icoCoruja">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\usuario\Documents\NetBeansProjects\InterfaceJava\src\images\coruja.png"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

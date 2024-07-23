@@ -69,6 +69,70 @@ public class TelaPrincipal extends javax.swing.JFrame {
         preencheTabela();
         
     }
+    
+    public enum Criterio {
+    ID, TITULO, AUTOR, ANO_PUBLICACAO, EDITORA, GENERO, REVISTA, VOLUME, RESUMO, TIPO
+}
+
+    private void OrdenarTabela(Criterio criteria) {
+    materialDAO materialDAO = new materialDAO();
+    List<material> listaMaterial = materialDAO.preencherTabelaMaterial();
+
+    if (listaMaterial != null) {
+        listaMaterial.sort((m1, m2) -> {
+            switch (criteria) {
+                case ID:
+                    return Integer.compare(m1.getId(), m2.getId());
+                case TITULO:
+                    return m1.getTítulo().compareToIgnoreCase(m2.getTítulo());
+                case AUTOR:
+                    return m1.getAutor().compareToIgnoreCase(m2.getAutor());
+                case ANO_PUBLICACAO:
+                    return m1.getAnoPublicacao().compareToIgnoreCase(m2.getAnoPublicacao());
+                case EDITORA:
+                    return m1.getEditora().compareToIgnoreCase(m2.getEditora());
+                case GENERO:
+                    return m1.getGenero().compareToIgnoreCase(m2.getGenero());
+                case REVISTA:
+                    return m1.getRevista().compareToIgnoreCase(m2.getRevista());
+                case VOLUME:
+                    return m1.getVolume().compareToIgnoreCase(m2.getVolume());
+                case RESUMO:
+                    return m1.getResumo().compareToIgnoreCase(m2.getResumo());
+                case TIPO:
+                    return m1.getTipo().compareToIgnoreCase(m2.getTipo());
+                default:
+                    return 0;
+            }
+        });
+
+        DefaultTableModel tabelaMaterial = (DefaultTableModel) tblMateriais.getModel();
+        tabelaMaterial.setNumRows(0);
+
+        try {
+            for (material m : listaMaterial) {
+                Object[] obj = new Object[]{
+                    m.getId(),
+                    m.getTítulo(),
+                    m.getAutor(),
+                    m.getAnoPublicacao(),
+                    m.getEditora(),
+                    m.getGenero(),
+                    m.getRevista(),
+                    m.getVolume(),
+                    m.getResumo(),
+                    m.getTipo()
+                };
+                tabelaMaterial.addRow(obj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao preencher a tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Nenhum material encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,7 +171,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "ID do material", "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         txtPergamum.setFont(new java.awt.Font("Meditative", 0, 25)); // NOI18N
         txtPergamum.setText("PERGAMUM");
@@ -148,12 +217,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tblMateriais.getColumnModel().getColumn(6).setPreferredWidth(10);
         }
 
-        icoCoruja.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\coruja.png")); // NOI18N
-
-        mnMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book.png")); // NOI18N
         mnMenu.setText("Menu");
 
-        mnMenuEmprestimos.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_addresses.png")); // NOI18N
         mnMenuEmprestimos.setText("Empréstimos");
         mnMenuEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,10 +229,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnMenu);
 
-        mnUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\status_online.png")); // NOI18N
         mnUsuario.setText("Usuário");
 
-        mnUsuarioPerfil.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\pencil.png")); // NOI18N
         mnUsuarioPerfil.setText("Perfil");
         mnUsuarioPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +241,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnUsuario);
 
-        mnAjuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\help.png")); // NOI18N
         mnAjuda.setText("Ajuda");
         mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -187,7 +249,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnAjuda);
 
-        mnSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\stop.png")); // NOI18N
         mnSair.setText("Sair");
         mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -312,6 +373,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         buscaMaterial(busca);
         
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        Criterio selectedCriterio = (Criterio) jComboBox1.getSelectedItem();
+        OrdenarTabela(selectedCriterio);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

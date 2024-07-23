@@ -70,6 +70,70 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         initComponents();
         preencheTabela();
     }
+    
+    public enum Criterio {
+    ID, TITULO, AUTOR, ANO_PUBLICACAO, EDITORA, GENERO, REVISTA, VOLUME, RESUMO, TIPO
+}
+
+    private void OrdenarTabela(Criterio criteria) {
+    materialDAO materialDAO = new materialDAO();
+    List<material> listaMaterial = materialDAO.preencherTabelaMaterial();
+
+    if (listaMaterial != null) {
+        listaMaterial.sort((m1, m2) -> {
+            switch (criteria) {
+                case ID:
+                    return Integer.compare(m1.getId(), m2.getId());
+                case TITULO:
+                    return m1.getTítulo().compareToIgnoreCase(m2.getTítulo());
+                case AUTOR:
+                    return m1.getAutor().compareToIgnoreCase(m2.getAutor());
+                case ANO_PUBLICACAO:
+                    return m1.getAnoPublicacao().compareToIgnoreCase(m2.getAnoPublicacao());
+                case EDITORA:
+                    return m1.getEditora().compareToIgnoreCase(m2.getEditora());
+                case GENERO:
+                    return m1.getGenero().compareToIgnoreCase(m2.getGenero());
+                case REVISTA:
+                    return m1.getRevista().compareToIgnoreCase(m2.getRevista());
+                case VOLUME:
+                    return m1.getVolume().compareToIgnoreCase(m2.getVolume());
+                case RESUMO:
+                    return m1.getResumo().compareToIgnoreCase(m2.getResumo());
+                case TIPO:
+                    return m1.getTipo().compareToIgnoreCase(m2.getTipo());
+                default:
+                    return 0;
+            }
+        });
+
+        DefaultTableModel tabelaMaterial = (DefaultTableModel) tblMateriais.getModel();
+        tabelaMaterial.setNumRows(0);
+
+        try {
+            for (material m : listaMaterial) {
+                Object[] obj = new Object[]{
+                    m.getId(),
+                    m.getTítulo(),
+                    m.getAutor(),
+                    m.getAnoPublicacao(),
+                    m.getEditora(),
+                    m.getGenero(),
+                    m.getRevista(),
+                    m.getVolume(),
+                    m.getResumo(),
+                    m.getTipo()
+                };
+                tabelaMaterial.addRow(obj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao preencher a tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Nenhum material encontrado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,7 +178,12 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "ID do material", "Título", "Autor", "Ano de publicação", "Editora", "Gênero", "Revista", "Volume", "Resumo", "Tipo" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,12 +213,8 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblMateriais);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\coruja.png")); // NOI18N
-
-        mnMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book.png")); // NOI18N
         mnMenu.setText("Menu");
 
-        mnMenuEmpréstimos.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_addresses.png")); // NOI18N
         mnMenuEmpréstimos.setText("Empréstimos");
         mnMenuEmpréstimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +223,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         });
         mnMenu.add(mnMenuEmpréstimos);
 
-        mnMenuGerenciarAcervo.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_open.png")); // NOI18N
         mnMenuGerenciarAcervo.setText("Gerenciar Acervo");
         mnMenuGerenciarAcervo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +231,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         });
         mnMenu.add(mnMenuGerenciarAcervo);
 
-        mnMenuSolicitacoes.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\book_go.png")); // NOI18N
         mnMenuSolicitacoes.setText("Solicitações");
         mnMenuSolicitacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,10 +241,8 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         jMenuBar1.add(mnMenu);
 
-        mnCadastro.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\group.png")); // NOI18N
         mnCadastro.setText("Cadastro");
 
-        mnCadastroUExterno.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_orange.png")); // NOI18N
         mnCadastroUExterno.setText("Cadastro de Usuário Externo");
         mnCadastroUExterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,7 +251,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         });
         mnCadastro.add(mnCadastroUExterno);
 
-        mnCadastroUInterno.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user_gray.png")); // NOI18N
         mnCadastroUInterno.setText("Cadastro de Usuário Interno");
         mnCadastroUInterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,10 +261,8 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         jMenuBar1.add(mnCadastro);
 
-        mnUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\user.png")); // NOI18N
         mnUsuario.setText("Usuário");
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\pencil.png")); // NOI18N
         jMenuItem3.setText("Perfil");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +273,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         jMenuBar1.add(mnUsuario);
 
-        mnAjuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\help.png")); // NOI18N
         mnAjuda.setText("Ajuda");
         mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -224,7 +281,6 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnAjuda);
 
-        mnSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\usuario\\Documents\\NetBeansProjects\\InterfaceJava\\src\\images\\stop.png")); // NOI18N
         mnSair.setText("Sair");
         mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -386,6 +442,11 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         perfil.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        Criterio selectedCriterio = (Criterio) jComboBox1.getSelectedItem();
+        OrdenarTabela(selectedCriterio);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
