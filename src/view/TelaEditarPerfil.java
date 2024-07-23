@@ -224,7 +224,7 @@ public class TelaEditarPerfil extends javax.swing.JFrame {
     private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
            
     String email = txtEmail.getText();
-    String endereço = txtEndereço.getText();
+    String endereco = txtEndereço.getText();
     String celular = txtCelular.getText();
     String celularReserva = txtCelularReserva.getText();
     String complemento = txtComplemento.getText();
@@ -232,18 +232,31 @@ public class TelaEditarPerfil extends javax.swing.JFrame {
     String matricula = System.getProperty("matricula");
 
     usuárioDAO dao = new usuárioDAO();
-    boolean sucesso = dao.alterarPerfil(matricula, email, celular, celularReserva, endereço, complemento, cep);
+    boolean sucesso = dao.alterarPerfil(matricula, email, celular, celularReserva, endereco, complemento, cep);
 
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Dados alterados com sucesso");
         
-        System.setProperty("email", email);
-        System.setProperty("endereco", endereço);
-        System.setProperty("celular", celular);
-        System.setProperty("celularreserva", celularReserva);
-        System.setProperty("complemento", complemento);
-        System.setProperty("cep", cep);
+        if (email != null && !email.isEmpty()) {
+            System.setProperty("email", email);
+        }
+        if (endereco != null && !endereco.isEmpty()) {
+            System.setProperty("endereco", endereco);
+        }
+        if (celular != null && !celular.isEmpty()) {
+            System.setProperty("celular", celular);
+        }
+        if (celularReserva != null && !celularReserva.isEmpty()) {
+            System.setProperty("celularreserva", celularReserva);
+        }
+        if (complemento != null && !complemento.isEmpty()) {
+            System.setProperty("complemento", complemento);
+        }
+        if (cep != null && !cep.isEmpty()) {
+            System.setProperty("cep", cep);
+        }
         
+        // Limpar os campos de texto após a atualização
         txtEmail.setText("");
         txtEndereço.setText("");
         txtCelular.setText("");

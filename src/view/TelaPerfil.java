@@ -286,7 +286,7 @@ public class TelaPerfil extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnEditarPerfil)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         pack();
@@ -296,6 +296,15 @@ public class TelaPerfil extends javax.swing.JFrame {
     private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
         
         TelaEditarPerfil tela = new TelaEditarPerfil();
+        tela.addWindowListener(new java.awt.event.WindowAdapter() {
+        
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+            
+            atualizarPerfil();
+            
+        }
+    });
         tela.setVisible(true);
         
     }//GEN-LAST:event_btnEditarPerfilActionPerformed
@@ -305,6 +314,7 @@ public class TelaPerfil extends javax.swing.JFrame {
         dispose();
         TelaEmprestimos novaTela = new TelaEmprestimos();
         novaTela.setVisible(true);
+        
     }//GEN-LAST:event_mnMenuEmprestimosActionPerformed
 
     private void mnUsuarioPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsuarioPerfilActionPerformed
