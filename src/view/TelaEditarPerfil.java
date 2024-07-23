@@ -222,25 +222,38 @@ public class TelaEditarPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
+           
+    String email = txtEmail.getText();
+    String endereço = txtEndereço.getText();
+    String celular = txtCelular.getText();
+    String celularReserva = txtCelularReserva.getText();
+    String complemento = txtComplemento.getText();
+    String cep = txtCep.getText();
+    String matricula = System.getProperty("matricula");
+
+    usuárioDAO dao = new usuárioDAO();
+    boolean sucesso = dao.alterarPerfil(matricula, email, celular, celularReserva, endereço, complemento, cep);
+
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Dados alterados com sucesso");
         
-        String email = txtEmail.getText();
-        String endereço = txtEndereço.getText();
-        String celular = txtCelular.getText();
-        String celularReserva = txtCelularReserva.getText();
-        String complemento = txtComplemento.getText();
-        String cep = txtCep.getText();
-        String matricula = System.getProperty("matricula");
-
-
-        usuárioDAO dao = new usuárioDAO();
-        boolean sucesso = dao.alterarPerfil(matricula, email, celular, celularReserva, endereço, complemento, cep);
-
-        if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Dados alterados com sucesso");
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao alterar dados");
-        }
+        System.setProperty("email", email);
+        System.setProperty("endereco", endereço);
+        System.setProperty("celular", celular);
+        System.setProperty("celularreserva", celularReserva);
+        System.setProperty("complemento", complemento);
+        System.setProperty("cep", cep);
         
+        txtEmail.setText("");
+        txtEndereço.setText("");
+        txtCelular.setText("");
+        txtCelularReserva.setText("");
+        txtComplemento.setText("");
+        txtCep.setText("");
+        
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao alterar dados");
+    }
         
     }//GEN-LAST:event_btnEditarPerfilActionPerformed
 

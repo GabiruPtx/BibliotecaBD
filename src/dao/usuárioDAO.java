@@ -112,54 +112,56 @@ public class usuárioDAO {
     }
     
     public boolean alterarPerfil(String matricula, String email, String celular, String celularReserva, String endereco, String complemento, String cep) {
-        StringBuilder sql = new StringBuilder("UPDATE usuário SET ");
-        List<String> fields = new ArrayList<>();
-        List<Object> values = new ArrayList<>();
+    StringBuilder sql = new StringBuilder("UPDATE usuário SET ");
+    List<String> fields = new ArrayList<>();
+    List<Object> values = new ArrayList<>();
 
-        if (email != null && !email.isEmpty()) {
-            fields.add("email = ?");
-            values.add(email);
-        }
-        if (celular != null && !celular.isEmpty()) {
-            fields.add("celular = ?");
-            values.add(celular);
-        }
-        if (celularReserva != null && !celularReserva.isEmpty()) {
-            fields.add("celularreserva = ?");
-            values.add(celularReserva);
-        }
-        if (endereco != null && !endereco.isEmpty()) {
-            fields.add("endereco = ?");
-            values.add(endereco);
-        }
-        if (complemento != null && !complemento.isEmpty()) {
-            fields.add("complemento = ?");
-            values.add(complemento);
-        }
-        if (cep != null && !cep.isEmpty()) {
-            fields.add("cep = ?");
-            values.add(cep);
-        }
-
-        if (fields.isEmpty()) {
-            return false; 
-        }
-
-        sql.append(String.join(", ", fields));
-        sql.append(" WHERE matricula = ?");
-        values.add(matricula);
-
-        try (PreparedStatement stmt = this.conn.prepareStatement(sql.toString())) {
-            for (int i = 0; i < values.size(); i++) {
-                stmt.setObject(i + 1, values.get(i));
-            }
-
-            int affectedRows = stmt.executeUpdate();
-            return affectedRows > 0;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
+    if (email != null && !email.isEmpty()) {
+        fields.add("email = ?");
+        values.add(email);
     }
+    if (celular != null && !celular.isEmpty()) {
+        fields.add("celular = ?");
+        values.add(celular);
+    }
+    if (celularReserva != null && !celularReserva.isEmpty()) {
+        fields.add("celularreserva = ?");
+        values.add(celularReserva);
+    }
+    if (endereco != null && !endereco.isEmpty()) {
+        fields.add("endereco = ?");
+        values.add(endereco);
+    }
+    if (complemento != null && !complemento.isEmpty()) {
+        fields.add("complemento = ?");
+        values.add(complemento);
+    }
+    if (cep != null && !cep.isEmpty()) {
+        fields.add("cep = ?");
+        values.add(cep);
+    }
+
+    if (fields.isEmpty()) {
+        return false; 
+    }
+
+    sql.append(String.join(", ", fields));
+    sql.append(" WHERE matricula = ?");
+    values.add(matricula);
+
+    try (PreparedStatement stmt = this.conn.prepareStatement(sql.toString())) {
+        for (int i = 0; i < values.size(); i++) {
+            stmt.setObject(i + 1, values.get(i));
+        }
+
+        int affectedRows = stmt.executeUpdate();
+        return affectedRows > 0;
+    } catch (Exception e) {
+        System.out.println("Erro ao alterar perfil: " + e.getMessage());
+        e.printStackTrace();  // Adiciona mais detalhes sobre a exceção
+        return false;
+    }
+}
+
     
 }
